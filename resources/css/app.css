@@ -76,8 +76,8 @@
         border-color: var(--color-gray-200, currentColor);
     }
 
-    input{
-      background-color: inherit;
+    input {
+        background-color: inherit;
     }
 }
 
@@ -153,48 +153,50 @@
 }
 
 @layer utilities {
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+    background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 4px;
+    background: #c1c1c1;
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a1a1a1;
+    background: #a1a1a1;
 }
 
 /* Smooth transitions */
 * {
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+    transition:
+        color 0.15s ease-in-out,
+        background-color 0.15s ease-in-out;
 }
 
 /* Typography for Bengali text */
 body {
-  font-family: "Noto Serif Bengali", Helmet, Freesans, Helvetica, Arial, sans-serif;
-  line-height: 1.6;
+    font-family: 'Noto Serif Bengali', Helmet, Freesans, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
 }
 
 /* Focus styles */
@@ -202,15 +204,15 @@ button:focus,
 input:focus,
 select:focus,
 textarea:focus {
-  outline: 2px solid #dc2626;
-  outline-offset: 2px;
+    outline: 2px solid #dc2626;
+    outline-offset: 2px;
 }
 
 /* Print styles */
 @media print {
-  .no-print {
-    display: none !important;
-  }
+    .no-print {
+        display: none !important;
+    }
 }
 
 @layer base {
@@ -223,6 +225,6 @@ textarea:focus {
     }
 
     button {
-      @apply cursor-pointer;
+        @apply cursor-pointer;
     }
 }

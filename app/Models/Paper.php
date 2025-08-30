@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Database\Factories\PaperFactory;
-use Spatie\MediaLibrary\HasMedia;
-use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Paper extends Model implements HasMedia
 {
@@ -29,10 +29,10 @@ class Paper extends Model implements HasMedia
 
     public function getUrl(string $key): ?string
     {
-        if (!isset($this->{$key})) {
+        if (! isset($this->{$key})) {
             return '';
         }
 
-        return url('storage/' . $this->{$key});
+        return url('storage/'.$this->{$key});
     }
 }

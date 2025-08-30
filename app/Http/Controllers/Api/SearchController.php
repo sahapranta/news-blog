@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Book;
+use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Book;
 use App\Models\Category;
 use App\Models\Festival;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use ProtoneMedia\LaravelCrossEloquentSearch\Search;
 
 class SearchController extends Controller
@@ -39,6 +39,7 @@ class SearchController extends Controller
         $results->getCollection()
             ->transform(function ($item) use ($mapper) {
                 $item->url = route($mapper[$item->type], $item->slug);
+
                 return $item;
             });
 

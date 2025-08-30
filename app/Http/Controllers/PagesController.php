@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Faq;
 use App\Models\Page;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PagesController extends Controller
@@ -39,12 +38,11 @@ class PagesController extends Controller
             ->orderBy('order', 'asc')
             ->get()
             ->groupBy('category')
-            ->map(fn($qus, $cat) => [
+            ->map(fn ($qus, $cat) => [
                 'title' => $cat,
-                'questions' => $qus->values()
+                'questions' => $qus->values(),
             ])
             ->values();
-
 
         return Inertia::render('FAQPage', [
             'faqs' => $faq,

@@ -2,9 +2,8 @@
 
 namespace App\Filament\Resources\Books\Pages;
 
-use Filament\Actions\EditAction;
 use App\Filament\Resources\Books\BookResource;
-use Filament\Actions;
+use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewBook extends ViewRecord

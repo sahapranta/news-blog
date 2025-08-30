@@ -3,11 +3,11 @@
 namespace App\Filament\Forms\Components\RichEditor\RichContentCustomBlocks;
 
 use Filament\Actions\Action;
-use Filament\Schemas\Components\Group;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor\RichContentCustomBlock;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Group;
 
 class FeaturedList extends RichContentCustomBlock
 {
@@ -18,7 +18,7 @@ class FeaturedList extends RichContentCustomBlock
 
     public static function getLabel(): string
     {
-        return "Featured List";
+        return 'Featured List';
     }
 
     public static function configureEditorAction(Action $action): Action

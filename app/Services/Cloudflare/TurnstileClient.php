@@ -2,18 +2,20 @@
 
 namespace App\Services\Cloudflare;
 
-use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\Http;
 
 class TurnstileClient
 {
     private const TURNSTILE_VERIFY_ENDPOINT = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+
     private const RETRY_ATTEMPTS = 3;
+
     private const RETRY_DELAY = 100;
 
     public function siteVerify(string $response): TurnstileResponse
     {
-        if (!config('services.turnstile.enabled')) {
+        if (! config('services.turnstile.enabled')) {
             return new TurnstileResponse(success: true, errorCodes: []);
         }
 
@@ -28,14 +30,14 @@ class TurnstileClient
             ->asForm()
             ->acceptJson()
             ->post(self::TURNSTILE_VERIFY_ENDPOINT, [
-                'secret'   => config('services.turnstile.secret_key'),
+                'secret' => config('services.turnstile.secret_key'),
                 'response' => $response,
             ]);
     }
 
     private function parseVerificationResponse(Response $response): TurnstileResponse
     {
-        if (!$response->ok()) {
+        if (! $response->ok()) {
             return new TurnstileResponse(success: false, errorCodes: []);
         }
 

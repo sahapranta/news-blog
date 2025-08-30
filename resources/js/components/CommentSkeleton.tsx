@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from '@/components/ui/skeleton';
 
 const CommentSkeleton = () => (
     <div className="flex items-center space-x-4">

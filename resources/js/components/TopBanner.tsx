@@ -1,6 +1,6 @@
-"use client";
-import { X } from "lucide-react";
-import React, { useEffect, useState } from "react";
+'use client';
+import { X } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 
 export type TopBannerProps = {
     visible: boolean;
@@ -11,12 +11,12 @@ export type TopBannerProps = {
     link: {
         text: string;
         url: string;
-    }
-}
+    };
+};
 
 type BannerProps = {
     banner: TopBannerProps;
-}
+};
 
 const TopBanner: React.FC<BannerProps> = ({ banner }) => {
     const [isVisible, setIsVisible] = useState(true);
@@ -60,39 +60,33 @@ const TopBanner: React.FC<BannerProps> = ({ banner }) => {
                             viewBox="0 0 24 24"
                             stroke="currentColor"
                         >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M13 10V3L4 14h7v7l9-11h-7z"
-                            />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                     </div>
                     <p className="flex items-center text-sm font-medium text-white">
-                        {banner.badge && (<span className="mr-1.5 hidden rounded-full bg-white px-2 py-0.5 text-xs font-bold text-teal-500 sm:inline-block">
-                            {banner.badge}
-                        </span>)}
+                        {banner.badge && (
+                            <span className="mr-1.5 hidden rounded-full bg-white px-2 py-0.5 text-xs font-bold text-teal-500 sm:inline-block">
+                                {banner.badge}
+                            </span>
+                        )}
                         <span>
                             {banner.message}
-                            {banner.link.url && (<a
-                                href={banner.link.url}
-                                className="ml-1.5 whitespace-nowrap underline hover:text-teal-100"
-                            >
-                                {banner.link.text}
-                            </a>)}
+                            {banner.link.url && (
+                                <a href={banner.link.url} className="ml-1.5 whitespace-nowrap underline hover:text-teal-100">
+                                    {banner.link.text}
+                                </a>
+                            )}
                         </span>
                     </p>
                 </div>
-                {banner.dismissible && (<button
-                    className="ml-3 flex-shrink-0 text-white focus:outline-none"
-                    onClick={dismissBanner}
-                    aria-label="Dismiss"
-                >
-                    <X className="h-5 w-5" />
-                </button>)}
+                {banner.dismissible && (
+                    <button className="ml-3 flex-shrink-0 text-white focus:outline-none" onClick={dismissBanner} aria-label="Dismiss">
+                        <X className="h-5 w-5" />
+                    </button>
+                )}
             </div>
         </div>
     );
-}
+};
 
 export default TopBanner;

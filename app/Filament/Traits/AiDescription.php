@@ -6,15 +6,14 @@ use Illuminate\Support\Facades\Http;
 
 trait AiDescription
 {
-
     protected static function makeMetaDescription(string $description): string
     {
         try {
-            throw_unless(config('services.ai.api_key'), "API KEY NOT FOUND");
+            throw_unless(config('services.ai.api_key'), 'API KEY NOT FOUND');
 
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . config('services.ai.api_key'),
-                'Content-Type'  => 'application/json',
+                'Authorization' => 'Bearer '.config('services.ai.api_key'),
+                'Content-Type' => 'application/json',
             ])
                 ->baseUrl(config('services.ai.base_url'))
                 ->post('/v1/chat/completions', [
@@ -26,7 +25,7 @@ trait AiDescription
                         ],
                         [
                             'role' => 'user',
-                            'content' => "Generate a short meta description for the following content in bangla:\n\n" . $description,
+                            'content' => "Generate a short meta description for the following content in bangla:\n\n".$description,
                         ],
                     ],
                     'max_tokens' => 100,

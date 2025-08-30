@@ -2,36 +2,36 @@
 
 namespace App\Filament\Resources\Articles;
 
+use App\Filament\Resources\Articles\Pages\CreateArticle;
+use App\Filament\Resources\Articles\Pages\EditArticle;
+use App\Filament\Resources\Articles\Pages\ListArticles;
+use App\Filament\Resources\Articles\Pages\ViewArticle;
+use App\Filament\Traits\AiDescription;
 use App\Models\Article;
-use Filament\Tables\Table;
-use Illuminate\Support\Str;
-use Filament\Schemas\Schema;
+use Filament\Actions\Action;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Resources\Resource;
-use Filament\Actions\BulkActionGroup;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
-use Filament\Schemas\Components\Grid;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Forms\Components\Textarea;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TagsInput;
-use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Section;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Resources\Resource;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
-use App\Filament\Resources\Articles\Pages\EditArticle;
-use App\Filament\Resources\Articles\Pages\ViewArticle;
-use App\Filament\Resources\Articles\Pages\ListArticles;
-use App\Filament\Resources\Articles\Pages\CreateArticle;
-use App\Filament\Traits\AiDescription;
-use Filament\Actions\Action;
-use Filament\Schemas\Components\Group;
+use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Illuminate\Support\Str;
 
 class ArticleResource extends Resource
 {
@@ -39,7 +39,7 @@ class ArticleResource extends Resource
 
     protected static ?string $model = Article::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Schema $schema): Schema
     {
@@ -54,7 +54,7 @@ class ArticleResource extends Resource
                                 TextInput::make('title')
                                     ->maxLength(255)
                                     ->live(true)
-                                    ->afterStateUpdated(fn(Set $set, Get $get, $state) => $get('slug') ?: $set('slug', Str::slug($state)))
+                                    ->afterStateUpdated(fn (Set $set, Get $get, $state) => $get('slug') ?: $set('slug', Str::slug($state)))
                                     ->required(),
                                 TextInput::make('slug')
                                     ->unique(Article::class, 'slug', ignoreRecord: true)
@@ -155,7 +155,7 @@ class ArticleResource extends Resource
                 EditAction::make(),
                 Action::make('Preview')
                     ->icon(Heroicon::ArrowTopRightOnSquare)
-                    ->url(fn(Article $record) => route('article.show', $record->slug), true)
+                    ->url(fn (Article $record) => route('article.show', $record->slug), true),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class NewsController extends Controller
 {
@@ -15,7 +14,7 @@ class NewsController extends Controller
         $requiredCategories = ['bangladesh', 'international', 'festival', 'lecture'];
 
         $categories = Category::whereIn('slug', $requiredCategories)
-            ->with(['articles' => fn($q) => $q->latest()->take(3)])
+            ->with(['articles' => fn ($q) => $q->latest()->take(3)])
             ->get();
 
         $featured = Article::with('category')
@@ -32,7 +31,7 @@ class NewsController extends Controller
                 ->inRandomOrder()
                 ->take(4)
                 ->get(),
-            'categories' => $categories
+            'categories' => $categories,
         ]);
     }
 
@@ -48,12 +47,14 @@ class NewsController extends Controller
     public function bangladesh()
     {
         $category = Category::where('slug', 'bangladesh')->firstOrFail();
+
         return $this->category($category);
     }
 
     public function international()
     {
         $category = Category::where('slug', 'international')->firstOrFail();
+
         return $this->category($category);
     }
 
@@ -68,6 +69,7 @@ class NewsController extends Controller
             $article->time = $article->created_at->diffForHumans();
             $article->excerpt = Str::limit(strip_tags($article->content), 120);
             $article->category = $category;
+
             return $article;
         });
 

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Quotation;
 use App\Models\TopNotice;
 use App\Services\AppSettings;
-use App\Http\Controllers\Controller;
-use App\Models\Quotation;
 use Illuminate\Support\Facades\Cache;
 
 class FrontendApiController extends Controller
@@ -41,7 +41,7 @@ class FrontendApiController extends Controller
             ->get();
 
         return $articles->map(
-            fn($article) => [
+            fn ($article) => [
                 'id' => $article->id,
                 'title' => $article->title,
                 'slug' => $article->slug,
@@ -69,14 +69,16 @@ class FrontendApiController extends Controller
         return AppSettings::get(AppSettings::TICKER_ARTICLES, []);
     }
 
-    protected function prepareAds($ads): array|null
+    protected function prepareAds($ads): ?array
     {
-        if (!$ads) return null;
+        if (! $ads) {
+            return null;
+        }
 
         $image = data_get($ads, 'image.0', null);
 
         if ($image) {
-            $image = url('storage/' . $image);
+            $image = url('storage/'.$image);
         }
 
         return [
@@ -104,7 +106,7 @@ class FrontendApiController extends Controller
         return [
             AppSettings::HORIZONTAL_ADS => $horizontalAds,
             AppSettings::VERTICAL_ADS => $verticalAds,
-            AppSettings::TOP_ADS => $topAds
+            AppSettings::TOP_ADS => $topAds,
         ];
     }
 
@@ -114,7 +116,8 @@ class FrontendApiController extends Controller
             'top-notice',
             now()->addHours(8),
             function () {
-                $topNotice  = TopNotice::currentlyDisplayable()->first();
+                $topNotice = TopNotice::currentlyDisplayable()->first();
+
                 return $topNotice ? [
                     'type' => $topNotice->type,
                     'badge' => $topNotice->badge,

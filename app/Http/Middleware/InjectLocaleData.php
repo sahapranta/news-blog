@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\BrowserLanguageService;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Services\BrowserLanguageService;
 
 class InjectLocaleData
 {
@@ -13,11 +13,11 @@ class InjectLocaleData
     {
         $languageCode = $request->cookie('locale');
 
-        if (!$languageCode) {
+        if (! $languageCode) {
             $languageCode = config('app.locale', 'en');
 
-            if (!$languageCode) {
-                $browserLanguageService = new BrowserLanguageService();
+            if (! $languageCode) {
+                $browserLanguageService = new BrowserLanguageService;
                 $languageCode = $browserLanguageService->detectLanguage($request);
             }
         }

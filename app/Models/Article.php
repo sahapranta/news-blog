@@ -5,20 +5,19 @@ namespace App\Models;
 use App\Filament\Forms\Components\RichEditor\RichContentCustomBlocks\FeaturedList;
 use Filament\Forms\Components\RichEditor\Models\Concerns\InteractsWithRichContent;
 use Filament\Forms\Components\RichEditor\Models\Contracts\HasRichContent;
-use Spatie\MediaLibrary\HasMedia;
 // use Spatie\Searchable\Searchable;
 // use Spatie\Searchable\SearchResult;
 // use Laravel\Scout\Searchable;
+use Filament\Forms\Components\RichEditor\RichContentRenderer;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Filament\Forms\Components\RichEditor\RichContentRenderer;
 
 class Article extends Model implements HasRichContent
 {
+    use HasComments;
     // use Searchable;
     use HasFactory;
-    use HasComments;
     use InteractsWithRichContent;
 
     protected $fillable = [
@@ -38,7 +37,6 @@ class Article extends Model implements HasRichContent
 
     public $asYouType = true;
 
-
     public function toSearchableArray()
     {
         return [
@@ -49,7 +47,6 @@ class Article extends Model implements HasRichContent
             'slug' => $this->slug,
         ];
     }
-
 
     protected $casts = [
         'published_at' => 'datetime',
@@ -115,8 +112,8 @@ class Article extends Model implements HasRichContent
             // ->fileAttachmentsDirectory('attachments')
             ->fileAttachmentsVisibility('public')
             ->customBlocks([
-                FeaturedList::class
-            ]);;
+                FeaturedList::class,
+            ]);
     }
 
     public function getContentHtmlAttribute()

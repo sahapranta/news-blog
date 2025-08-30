@@ -3,13 +3,13 @@
 namespace App\Providers;
 
 use App\Models\Article;
-use App\Models\Paper;
 use App\Models\Book;
-use Illuminate\Http\Request;
-use Illuminate\Support\ServiceProvider;
+use App\Models\Paper;
 use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perMinute(2)
                 ->by($request->user()?->id ?: $request->ip())
                 ->response(
-                    fn(Request $req, array $headers) => response('Too Many Requests, check back after a minute', 429, $headers)
+                    fn (Request $req, array $headers) => response('Too Many Requests, check back after a minute', 429, $headers)
                 );
         });
 
@@ -44,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perMinute(6)
                 ->by($request->user()?->id ?: $request->ip())
                 ->response(
-                    fn(Request $req, array $headers) => response('Too Many Requests, check back after a minute', 429, $headers)
+                    fn (Request $req, array $headers) => response('Too Many Requests, check back after a minute', 429, $headers)
                 );
         });
 
@@ -52,12 +52,11 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perMinute(1, 15)
                 ->by($request->user()?->id ?: $request->ip())
                 ->response(
-                    fn(Request $req, array $headers) => response('Too Many Requests, please try again after 15 minutes', 429, $headers)
-                )
-                // ->response(
-                //     fn(Request $req, array $headers) => response(view('errors.429', ['retryAfter' => '5 minutes']), 429, $headers)
-                // )
-            ;
+                    fn (Request $req, array $headers) => response('Too Many Requests, please try again after 15 minutes', 429, $headers)
+                );
+            // ->response(
+            //     fn(Request $req, array $headers) => response(view('errors.429', ['retryAfter' => '5 minutes']), 429, $headers)
+            // )
         });
     }
 }

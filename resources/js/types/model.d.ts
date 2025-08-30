@@ -103,7 +103,7 @@ export interface PaperProps {
     created_at: string;
     updated_at: string;
     download_count: number;
-    media?: MediaProps[]
+    media?: MediaProps[];
 }
 
 interface ApiError {

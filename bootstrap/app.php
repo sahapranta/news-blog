@@ -1,23 +1,22 @@
 <?php
 
-use Inertia\Inertia;
-use Illuminate\Http\Request;
-use Illuminate\Foundation\Application;
 use App\Http\Middleware\HandleAppearance;
-use App\Http\Middleware\InjectLocaleData;
 use App\Http\Middleware\HandleInertiaRequests;
-use Symfony\Component\HttpFoundation\Response;
+use App\Http\Middleware\InjectLocaleData;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
+use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
-use Illuminate\Process\Pipe;
+use Inertia\Inertia;
+use Symfony\Component\HttpFoundation\Response;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
-        web: __DIR__ . '/../routes/web.php',
-        api: __DIR__ . '/../routes/api.php',
-        commands: __DIR__ . '/../routes/console.php',
+        web: __DIR__.'/../routes/web.php',
+        api: __DIR__.'/../routes/api.php',
+        commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
@@ -57,7 +56,7 @@ return Application::configure(basePath: dirname(__DIR__))
                         }
                     });
                 // return Inertia::render('Errors/404', ['status' => $response->getStatusCode()])
-                //     ->toResponse($request)                    
+                //     ->toResponse($request)
                 //     ->setStatusCode($response->getStatusCode());
             }
 

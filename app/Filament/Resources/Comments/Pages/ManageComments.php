@@ -2,11 +2,10 @@
 
 namespace App\Filament\Resources\Comments\Pages;
 
-use Filament\Actions\CreateAction;
-use Filament\Actions;
 use App\Filament\Resources\Comments\CommentResource;
-use Filament\Resources\Pages\ManageRecords;
 use App\Filament\Resources\Comments\Widgets\CommentOverview;
+use Filament\Actions\CreateAction;
+use Filament\Resources\Pages\ManageRecords;
 
 class ManageComments extends ManageRecords
 {

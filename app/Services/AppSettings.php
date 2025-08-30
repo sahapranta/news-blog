@@ -8,11 +8,17 @@ use Illuminate\Support\Facades\Cache;
 class AppSettings
 {
     const TRENDING_ARTICLES = 'trending_articles';
+
     const POPULAR_ARTICLES = 'popular_articles';
+
     const TICKER_ARTICLES = 'ticker_articles';
+
     const FEATURED_ARTICLE = 'featured_article';
+
     const HORIZONTAL_ADS = 'horizontal_ads';
+
     const VERTICAL_ADS = 'vertical_ads';
+
     const TOP_ADS = 'top_ads';
 
     public static function get(string $key, mixed $default = null): mixed
@@ -41,7 +47,7 @@ class AppSettings
         $settings = Cache::remember(
             self::cacheKey(),
             now()->addMinutes(60),
-            fn() => self::allSettingsAsArray()
+            fn () => self::allSettingsAsArray()
         );
 
         if ($key) {
@@ -56,7 +62,7 @@ class AppSettings
         return Setting::active()
             ->select('key', 'value', 'type', 'options')
             ->get()
-            ->mapWithKeys(fn(Setting $setting) => self::mapSetting($setting))
+            ->mapWithKeys(fn (Setting $setting) => self::mapSetting($setting))
             ->toArray();
     }
 
@@ -64,7 +70,7 @@ class AppSettings
     {
         if ($setting->type == 'boolean') {
             return [$setting->key => boolval($setting->value)];
-        } else if (in_array($setting->type, ['array', 'key-value', 'tags'])) {
+        } elseif (in_array($setting->type, ['array', 'key-value', 'tags'])) {
             return [$setting->key => $setting->options];
         } else {
             return [$setting->key => $setting->value];

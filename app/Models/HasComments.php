@@ -29,9 +29,11 @@ trait HasComments
         ?string $body,
         ?string $parentId = null
     ): ?Comment {
-        if ($body === null) return null;
+        if ($body === null) {
+            return null;
+        }
 
-        $comment = new Comment();
+        $comment = new Comment;
         $comment->commentable_id = $this->id;
         $comment->commentable_type = get_class($this);
         $comment->user_id = $user->id;
@@ -40,5 +42,5 @@ trait HasComments
         $comment->save();
 
         return $comment;
-    } 
+    }
 }

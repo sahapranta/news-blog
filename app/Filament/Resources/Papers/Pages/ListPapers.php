@@ -2,9 +2,8 @@
 
 namespace App\Filament\Resources\Papers\Pages;
 
-use Filament\Actions\CreateAction;
 use App\Filament\Resources\Papers\PaperResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListPapers extends ListRecords

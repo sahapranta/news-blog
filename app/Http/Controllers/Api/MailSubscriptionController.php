@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Rules\Turnstile;
-use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\MailSubscriber;
+use App\Rules\Turnstile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class MailSubscriptionController extends Controller
 {
@@ -15,7 +15,7 @@ class MailSubscriptionController extends Controller
         $request->validate([
             'email' => 'required|email|unique:mail_subscribers',
             'name' => 'nullable|string|max:255',
-            'turnstile-response' => ['required', new Turnstile()],
+            'turnstile-response' => ['required', new Turnstile],
         ], [
             'email.unique' => 'The email has already been subscribed.',
         ]);
@@ -30,7 +30,7 @@ class MailSubscriptionController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Subscription successful'
+            'message' => 'Subscription successful',
         ]);
     }
 
@@ -67,7 +67,6 @@ class MailSubscriptionController extends Controller
 
         return response()->json(['message' => 'Unsubscribed successfully']);
     }
-
 
     public function status(Request $request)
     {

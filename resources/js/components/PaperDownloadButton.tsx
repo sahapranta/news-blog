@@ -1,8 +1,8 @@
-import React from "react";
-import { Download } from "lucide-react";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
-import { Link } from "@inertiajs/react";
-import { route } from "ziggy-js";
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Link } from '@inertiajs/react';
+import { Download } from 'lucide-react';
+import React from 'react';
+import { route } from 'ziggy-js';
 
 interface DownloadButtonProps {
     pdfUrl?: string | null;
@@ -15,17 +15,17 @@ interface DownloadButtonProps {
 const PaperDownloadButton: React.FC<DownloadButtonProps> = ({
     pdfUrl,
     slug,
-    text = "ডাউনলোড",
-    disabledTooltip = "Sorry! This issue is not available."
+    text = 'ডাউনলোড',
+    disabledTooltip = 'Sorry! This issue is not available.',
 }) => {
     if (pdfUrl) {
         return (
             <Link
                 href={route('paper.download', { paper: slug })}
                 download
-                className="flex-1 border border-red-600 text-red-600 py-2 px-3 rounded text-sm font-medium hover:bg-red-50 transition-colors flex items-center justify-center"
+                className="flex flex-1 items-center justify-center rounded border border-red-600 px-3 py-2 text-sm font-medium text-red-600 transition-colors hover:bg-red-50"
             >
-                <Download className="w-3 h-3 mr-1" />
+                <Download className="mr-1 h-3 w-3" />
                 {text}
             </Link>
         );
@@ -35,9 +35,9 @@ const PaperDownloadButton: React.FC<DownloadButtonProps> = ({
         <Tooltip>
             <TooltipTrigger
                 disabled
-                className="flex-1 border border-red-400 text-red-400 py-2 px-3 rounded text-sm font-medium bg-white cursor-not-allowed flex items-center justify-center"
+                className="flex flex-1 cursor-not-allowed items-center justify-center rounded border border-red-400 bg-white px-3 py-2 text-sm font-medium text-red-400"
             >
-                <Download className="w-3 h-3 mr-1" />
+                <Download className="mr-1 h-3 w-3" />
                 {text}
             </TooltipTrigger>
             <TooltipContent>

@@ -1,23 +1,23 @@
 import { api } from '@/hooks/use-api';
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware'
-import { route } from 'ziggy-js';
 import { AdsProps, ArticleProps, QuotationProps } from '@/types/model';
+import { route } from 'ziggy-js';
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 const CACHE_DURATION_MS = 60 * 60 * 1000; // 1 hour
 
 type SiteData = {
-    breakingNews: { title: string, link: string, target: string, out?: boolean }[];
+    breakingNews: { title: string; link: string; target: string; out?: boolean }[];
     lastFetched: number | null;
-    topBanner: | null;
+    topBanner: null;
     quote: QuotationProps | null;
     ads: AdsProps | null;
     trendingNews: ArticleProps[];
-    popularNews: { title: string, slug: string }[];
+    popularNews: { title: string; slug: string }[];
     clearBreakingNews: () => void;
     getBreakingNews: () => SiteData['breakingNews'];
     fetchBreakingNews: (force?: boolean) => Promise<void>;
-}
+};
 
 export const useSiteData = create<SiteData>()(
     persist(
@@ -54,5 +54,6 @@ export const useSiteData = create<SiteData>()(
             version: 1,
             name: 'site-data',
             storage: createJSONStorage(() => sessionStorage),
-        })
-)
+        },
+    ),
+);

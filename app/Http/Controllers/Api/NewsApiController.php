@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Article;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 use App\Services\AppSettings;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 class NewsApiController extends Controller
 {
@@ -41,14 +40,14 @@ class NewsApiController extends Controller
             ->with(['category:id,title'])
             ->select('id', 'title', 'slug', 'excerpt', 'category_id', 'created_at')
             ->where(
-                fn($q) => $q->where('title', 'like', "%{$query}%")
+                fn ($q) => $q->where('title', 'like', "%{$query}%")
                     ->orWhere('slug', 'like', "%{$query}%")
                     ->orWhere('excerpt', 'like', "%{$query}%")
                     ->orWhereJsonContains('tags', $query)
             )
             ->latest()
             ->paginate(10)
-            ->through(fn($article) => [
+            ->through(fn ($article) => [
                 'id' => $article->id,
                 'title' => $article->title,
                 'slug' => $article->slug,
@@ -58,5 +57,5 @@ class NewsApiController extends Controller
             ]);
 
         return response()->json($articles);
-    }    
+    }
 }

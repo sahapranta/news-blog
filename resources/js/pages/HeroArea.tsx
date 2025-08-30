@@ -1,26 +1,16 @@
-import React from 'react';
 import { FeaturedNewsProps } from '@/types/model';
 import { Link } from '@inertiajs/react';
+import React from 'react';
 
 const HeroArea: React.FC<{ featured: FeaturedNewsProps }> = ({ featured }) => {
     return (
-        <div className="relative flex flex-col overflow-hidden rounded-xl bg-gradient-to-br from-gray-200 to-gray-100 p-6 text-black shadow-xl md:flex-row md:items-center md:justify-between mb-8">
+        <div className="relative mb-8 flex flex-col overflow-hidden rounded-xl bg-gradient-to-br from-gray-200 to-gray-100 p-6 text-black shadow-xl md:flex-row md:items-center md:justify-between">
             {/* Pattern overlay */}
             <div className="absolute inset-0 opacity-60">
                 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
                     <defs>
-                        <pattern
-                            id="grid"
-                            width="20"
-                            height="20"
-                            patternUnits="userSpaceOnUse"
-                        >
-                            <path
-                                d="M 20 0 L 0 0 0 20"
-                                fill="none"
-                                stroke="white"
-                                strokeWidth="1"
-                            />
+                        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="white" strokeWidth="1" />
                         </pattern>
                     </defs>
                     <rect width="100%" height="100%" fill="url(#grid)" />
@@ -32,14 +22,13 @@ const HeroArea: React.FC<{ featured: FeaturedNewsProps }> = ({ featured }) => {
                 <div className="inline-block rounded-lg bg-red-500 px-3 py-1 text-xs font-semibold tracking-wider text-white uppercase">
                     {featured.category.title}
                 </div>
-                <h2 className="text-2xl leading-tight font-bold tracking-tight lg:text-4xl">
-                    {featured.title}
-                </h2>
-                <p className="max-w-xl text-sm text-gray-800 md:text-base">
-                    {featured.excerpt}
-                </p>
+                <h2 className="text-2xl leading-tight font-bold tracking-tight lg:text-4xl">{featured.title}</h2>
+                <p className="max-w-xl text-sm text-gray-800 md:text-base">{featured.excerpt}</p>
                 <div>
-                    <Link href={route('article.show', { slug: featured.slug })} className="rounded-md border border-white/30 bg-transparent font-medium transition-all hover:bg-white/10">
+                    <Link
+                        href={route('article.show', { slug: featured.slug })}
+                        className="rounded-md border border-white/30 bg-transparent font-medium transition-all hover:bg-white/10"
+                    >
                         Read More ...
                     </Link>
                 </div>
@@ -52,12 +41,12 @@ const HeroArea: React.FC<{ featured: FeaturedNewsProps }> = ({ featured }) => {
                     <img
                         src="https://www.shova.link/wp-content/uploads/2025/01/%E0%A6%87%E0%A6%B8%E0%A6%95%E0%A6%A8-%E0%A6%B8%E0%A6%AE%E0%A7%8D%E0%A6%AA%E0%A6%B0%E0%A7%8D%E0%A6%95%E0%A7%87-%E0%A6%AC%E0%A6%BF%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A6%BE%E0%A6%B0%E0%A6%BF%E0%A6%A4-%E0%A6%A4%E0%A6%A5%E0%A7%8D%E0%A6%AF.webp"
                         alt={featured.title}
-                        className="drop-shadow-2xl object-cover h-full"
+                        className="h-full object-cover drop-shadow-2xl"
                     />
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default HeroArea;

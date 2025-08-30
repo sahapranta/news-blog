@@ -14,7 +14,7 @@ class ArticleFactory extends Factory
 
     public function definition(): array
     {
-        $fk = new BanglaFaker();
+        $fk = new BanglaFaker;
 
         return [
             'title' => $fk->sentence(),

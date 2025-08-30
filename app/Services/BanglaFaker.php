@@ -58,7 +58,7 @@ class BanglaFaker
         'তবুও',
         'কারণ',
         'যতক্ষণ',
-        'এমনকি'
+        'এমনকি',
     ];
 
     public function word(): string
@@ -76,7 +76,8 @@ class BanglaFaker
             $words[] = $this->word();
         }
         $sentence = implode(' ', $words);
-        return mb_substr(mb_strtoupper(mb_substr($sentence, 0, 1)) . mb_substr($sentence, 1), 0) . '।';
+
+        return mb_substr(mb_strtoupper(mb_substr($sentence, 0, 1)).mb_substr($sentence, 1), 0).'।';
     }
 
     public function paragraph(int $sentenceCount = 3): string
@@ -85,6 +86,7 @@ class BanglaFaker
         for ($i = 0; $i < $sentenceCount; $i++) {
             $paragraph[] = $this->sentence(rand(5, 10));
         }
+
         return implode(' ', $paragraph);
     }
 
@@ -92,8 +94,9 @@ class BanglaFaker
     {
         $html = '';
         for ($i = 0; $i < $paragraphCount; $i++) {
-            $html .= '<p>' . $this->paragraph(rand(3, 5)) . '</p>' . PHP_EOL;
+            $html .= '<p>'.$this->paragraph(rand(3, 5)).'</p>'.PHP_EOL;
         }
+
         return $html;
     }
 }

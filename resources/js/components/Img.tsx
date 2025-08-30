@@ -10,6 +10,6 @@ const Img: React.FC<React.ImgHTMLAttributes<HTMLImageElement>> = (props) => {
             }}
         />
     );
-}
+};
 
 export default Img;

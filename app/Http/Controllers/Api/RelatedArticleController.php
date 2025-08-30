@@ -18,13 +18,13 @@ class RelatedArticleController extends Controller
             return response()->json([
                 'success' => true,
                 'data' => $suggestions,
-                'total' => $suggestions->count()
+                'total' => $suggestions->count(),
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to fetch post suggestions',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -32,8 +32,7 @@ class RelatedArticleController extends Controller
     /**
      * Get related posts based on multiple criteria
      *
-     * @param Article $currentPost
-     * @param int $limit
+     * @param  int  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
     private function getRelatedPosts(Article $currentPost, $limit = 5)
@@ -78,8 +77,7 @@ class RelatedArticleController extends Controller
     /**
      * Get posts with similar tags
      *
-     * @param Article $currentPost
-     * @param int $limit
+     * @param  int  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
     private function getPostsByTags(Article $currentPost, $limit)
@@ -102,7 +100,7 @@ class RelatedArticleController extends Controller
         foreach ($currentTags as $tag) {
             $tag = trim($tag);
             if ($tag) {
-                $query->orWhere('tags', 'LIKE', '%' . $tag . '%');
+                $query->orWhere('tags', 'LIKE', '%'.$tag.'%');
             }
         }
 
@@ -125,13 +123,12 @@ class RelatedArticleController extends Controller
     /**
      * Get posts from the same category
      *
-     * @param Article $currentPost
-     * @param int $limit
+     * @param  int  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
     private function getPostsByCategory(Article $currentPost, $limit)
     {
-        if (!$currentPost->category_id) {
+        if (! $currentPost->category_id) {
             return collect();
         }
 
@@ -159,8 +156,7 @@ class RelatedArticleController extends Controller
     /**
      * Get other posts by the same author
      *
-     * @param Article $currentPost
-     * @param int $limit
+     * @param  int  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
     private function getPostsByAuthor(Article $currentPost, $limit)
@@ -179,7 +175,7 @@ class RelatedArticleController extends Controller
                 'featured_image',
                 'published_at',
                 'created_at',
-                'user_id'
+                'user_id',
             ])
             ->with(['category:id,title'])
             ->orderBy('published_at', 'desc')
@@ -190,8 +186,7 @@ class RelatedArticleController extends Controller
     /**
      * Get recent verified posts as fallback
      *
-     * @param Article $currentPost
-     * @param int $limit
+     * @param  int  $limit
      * @return \Illuminate\Database\Eloquent\Collection
      */
     private function getRecentPosts(Article $currentPost, $limit)
@@ -219,8 +214,7 @@ class RelatedArticleController extends Controller
     /**
      * Alternative method: Get suggestions with weighted scoring
      *
-     * @param Request $request
-     * @param int $postId
+     * @param  int  $postId
      * @return \Illuminate\Http\JsonResponse
      */
     public function getSuggestionsWithScoring(Request $request, $postId)
@@ -234,13 +228,13 @@ class RelatedArticleController extends Controller
             return response()->json([
                 'success' => true,
                 'data' => $suggestions,
-                'total' => $suggestions->count()
+                'total' => $suggestions->count(),
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Failed to fetch Article suggestions',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -248,8 +242,7 @@ class RelatedArticleController extends Controller
     /**
      * Get related posts using a scoring system
      *
-     * @param Article $currentPost
-     * @param int $limit
+     * @param  int  $limit
      * @return \Illuminate\Support\Collection
      */
     private function getRelatedPostsWithScoring(Article $currentPost, $limit)
@@ -271,7 +264,7 @@ class RelatedArticleController extends Controller
                 'featured_image',
                 'published_at',
                 'created_at',
-                'tags'
+                'tags',
             ])
             ->with(['category:id,title'])
             ->get();
@@ -305,6 +298,7 @@ class RelatedArticleController extends Controller
             }
 
             $post->similarity_score = $score;
+
             return $post;
         });
 

@@ -7,8 +7,4 @@ interface HomeLayoutProps {
     breadcrumbs?: BreadcrumbItem[];
 }
 
-export default ({ children, ...props }: HomeLayoutProps) => (
-    <HomeLayoutTemplate {...props}>
-        {children}
-    </HomeLayoutTemplate>
-);
+export default ({ children, ...props }: HomeLayoutProps) => <HomeLayoutTemplate {...props}>{children}</HomeLayoutTemplate>;

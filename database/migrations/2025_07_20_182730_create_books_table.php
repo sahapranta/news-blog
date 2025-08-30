@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('pdf_url')->nullable();
             $table->string('author')->nullable();
             $table->string('publisher')->nullable();
-            $table->string('isbn')->nullable();            
+            $table->string('isbn')->nullable();
             $table->unsignedInteger('pages')->default(0);
             $table->unsignedInteger('price')->default(0);
             $table->unsignedInteger('discount')->default(0);

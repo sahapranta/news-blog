@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
 use App\Models\Festival;
-use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class EventsController extends Controller
 {
     public function index()
     {
         return Inertia::render('events/index', [
-            "festivals" => Festival::orderBy('start_date')
+            'festivals' => Festival::orderBy('start_date')
                 ->select(
                     'id',
                     'title',

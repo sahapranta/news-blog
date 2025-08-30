@@ -17,7 +17,7 @@ const mainNavItems: NavItem[] = [
         title: 'Articles',
         href: '/admin/articles',
         icon: LayoutGrid,
-    }
+    },
 ];
 
 const footerNavItems: NavItem[] = [

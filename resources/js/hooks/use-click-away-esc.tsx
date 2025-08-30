@@ -1,10 +1,9 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from 'react';
 
 export function useClickAwayAndEscape(ref: React.RefObject<HTMLDivElement | null>, onClose: () => void) {
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Escape") {
+            if (event.key === 'Escape') {
                 onClose();
             }
         };
@@ -15,12 +14,12 @@ export function useClickAwayAndEscape(ref: React.RefObject<HTMLDivElement | null
             }
         };
 
-        document.addEventListener("keydown", handleKeyDown);
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('mousedown', handleClickOutside);
 
         return () => {
-            document.removeEventListener("keydown", handleKeyDown);
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener('keydown', handleKeyDown);
+            document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [ref, onClose]);
 }

@@ -1,10 +1,10 @@
-import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 // import { type BreadcrumbItem } from '@/types';
-import { useEffect, type PropsWithChildren } from 'react';
-import { useSiteData } from '@/stores/useSiteData';
-import { Toaster } from "@/components/ui/sonner"
 import TopBanner from '@/components/TopBanner';
+import { Toaster } from '@/components/ui/sonner';
+import { useSiteData } from '@/stores/useSiteData';
+import { useEffect, type PropsWithChildren } from 'react';
 
 // export default function HomeHeaderLayout({ children }: PropsWithChildren<{ breadcrumbs?: BreadcrumbItem[] }>) {
 export default function HomeHeaderLayout({ children }: PropsWithChildren) {
@@ -20,7 +20,7 @@ export default function HomeHeaderLayout({ children }: PropsWithChildren) {
             <Header />
             {children}
             <Footer />
-            <Toaster position="bottom-center" richColors/>
+            <Toaster position="bottom-center" richColors />
         </div>
     );
 }

@@ -52,6 +52,7 @@ class Comment extends Model
     {
         $this->is_verified = true;
         $this->save();
+
         return $this;
     }
 }

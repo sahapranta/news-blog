@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->foreignIdFor(\App\Models\User::class)->constrained();
-            $table->boolean('is_active')->default(true);            
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

@@ -7,17 +7,17 @@ use Illuminate\Database\Seeder;
 
 class ArticleSeeder extends Seeder
 {
-  use WithoutModelEvents;
+    use WithoutModelEvents;
 
-  public function run(): void
-  {
-    \App\Models\Article::truncate();
+    public function run(): void
+    {
+        \App\Models\Article::truncate();
 
-    $articles = [
-      [
-        'title' => 'ISKCON কী এবং কেন?',
-        'slug' => 'what-is-iskcon',
-        'content' => <<<HTML
+        $articles = [
+            [
+                'title' => 'ISKCON কী এবং কেন?',
+                'slug' => 'what-is-iskcon',
+                'content' => <<<'HTML'
 <h2>ISKCON কী?</h2>
 <p>ISKCON (ইন্টারন্যাশনাল সোসাইটি ফর কৃষ্ণ কনসাসনেস) ১৯৬৬ সালে <strong>এ. সি. ভক্তিবেদান্ত স্বামী প্রভুপাদ</strong> কর্তৃক প্রতিষ্ঠিত হয়। এই সংগঠনের উদ্দেশ্য হলো শ্রীকৃষ্ণের ভক্তি ও বৈদিক জ্ঞানের প্রচার।</p>
 
@@ -30,11 +30,11 @@ class ArticleSeeder extends Seeder
 
 <p>ISKCON মন্দিরসমূহে প্রতিদিন <em>আরতি, কীর্তন, প্রসাদ বিতরণ</em> এবং বিভিন্ন ধর্মীয় কার্যক্রম পালন করা হয়। এটি বৈষ্ণব দর্শনের উপর প্রতিষ্ঠিত একটি বৈশ্বিক আধ্যাত্মিক সংগঠন।</p>
 HTML
-      ],
-      [
-        'title' => 'মায়াপুর - ISKCON এর আন্তর্জাতিক সদর দপ্তর',
-        'slug' => 'mayapur-iskcon-headquarters',
-        'content' => <<<HTML
+            ],
+            [
+                'title' => 'মায়াপুর - ISKCON এর আন্তর্জাতিক সদর দপ্তর',
+                'slug' => 'mayapur-iskcon-headquarters',
+                'content' => <<<'HTML'
 <h2>মায়াপুর ধাম</h2>
 <p><strong>মায়াপুর</strong> পশ্চিমবঙ্গের নদিয়া জেলায় অবস্থিত এবং এটি <strong>চৈতন্য মহাপ্রভুর জন্মস্থান</strong> হিসেবে বিশেষভাবে পরিচিত।</p>
 
@@ -49,11 +49,11 @@ HTML
   <li>শিক্ষা, সাধনা ও সেবার কেন্দ্র</li>
 </ul>
 HTML
-      ],
-      [
-        'title' => 'একাদশী উপবাসের মাহাত্ম্য',
-        'slug' => 'ekadashi-fasting-importance',
-        'content' => <<<HTML
+            ],
+            [
+                'title' => 'একাদশী উপবাসের মাহাত্ম্য',
+                'slug' => 'ekadashi-fasting-importance',
+                'content' => <<<'HTML'
 <h2>একাদশী উপবাস কী?</h2>
 <p>একাদশী উপবাস হল বৈষ্ণব ধর্মাবলম্বীদের একটি গুরুত্বপূর্ণ আচার। এটি প্রতি চন্দ্র মাসে দু’বার পালন করা হয়—শুক্লপক্ষ ও কৃষ্ণপক্ষে।</p>
 
@@ -66,11 +66,11 @@ HTML
 
 <p>ISKCON-এ একাদশী দিন বিশেষ ভক্তি কার্যক্রম, কীর্তন, জপ ও ভাগবত পাঠের মাধ্যমে পালিত হয়। অনেক ভক্ত শুধু ফল ও জল গ্রহণ করে উপবাস পালন করেন।</p>
 HTML
-      ],
-      [
-        'title' => 'ভগবদ্গীতা: একটি চিরন্তন জ্ঞান',
-        'slug' => 'bhagavad-gita-eternal-knowledge',
-        'content' => <<<HTML
+            ],
+            [
+                'title' => 'ভগবদ্গীতা: একটি চিরন্তন জ্ঞান',
+                'slug' => 'bhagavad-gita-eternal-knowledge',
+                'content' => <<<'HTML'
 <h2>ভগবদ্গীতা কী?</h2>
 <p><strong>ভগবদ্গীতা</strong> হল মহাভারতের অংশ, যা ভগবান শ্রীকৃষ্ণ অর্জুনকে কুরুক্ষেত্র যুদ্ধে উপদেশ স্বরূপ প্রদান করেন।</p>
 
@@ -83,11 +83,11 @@ HTML
 
 <p>ISKCON-এ গীতা পাঠ এবং এর ব্যাখ্যা প্রতিনিয়ত চলে, যাতে ভক্তরা জীবনের সঠিক পথ খুঁজে পান।</p>
 HTML
-      ],
-      [
-        'title' => 'বৃন্দাবন ধামের মাহাত্ম্য',
-        'slug' => 'glory-of-vrindavan-dham',
-        'content' => <<<HTML
+            ],
+            [
+                'title' => 'বৃন্দাবন ধামের মাহাত্ম্য',
+                'slug' => 'glory-of-vrindavan-dham',
+                'content' => <<<'HTML'
 <h2>বৃন্দাবন - শ্রীকৃষ্ণের লীলাভূমি</h2>
 <p>বৃন্দাবন হল সেই পবিত্র স্থান যেখানে শ্রীকৃষ্ণ তাঁর শৈশব ও কৈশোরে অসংখ্য লীলা করেছেন। এটি বৈষ্ণবদের জন্য এক মহাপবিত্র তীর্থস্থান।</p>
 
@@ -100,11 +100,11 @@ HTML
 
 <p>ISKCON বৃন্দাবন মন্দিরে প্রতিদিন হাজারো ভক্ত আসেন দর্শন, কীর্তন এবং সাধনায় অংশ নিতে।</p>
 HTML
-      ],
-      [
-        'title' => 'হরে কৃষ্ণ মহামন্ত্রের শক্তি',
-        'slug' => 'power-of-hare-krishna-mahamantra',
-        'content' => <<<HTML
+            ],
+            [
+                'title' => 'হরে কৃষ্ণ মহামন্ত্রের শক্তি',
+                'slug' => 'power-of-hare-krishna-mahamantra',
+                'content' => <<<'HTML'
 <h2>মহামন্ত্র কী?</h2>
 <p><strong>"হরে কৃষ্ণ, হরে কৃষ্ণ, কৃষ্ণ কৃষ্ণ, হরে হরে,<br>
 হরে রাম, হরে রাম, রাম রাম, হরে হরে"</strong></p>
@@ -114,11 +114,11 @@ HTML
 <h3>ISKCON-এ মহামন্ত্র</h3>
 <p>প্রতিদিন ভোর থেকে শুরু করে বিভিন্ন সময় মন্দিরে এই মন্ত্র ধ্বনিত হয়। ভক্তরা জপমালা ব্যবহার করে একাগ্রচিত্তে মহামন্ত্র জপ করেন। এটি মনকে স্থির করে ও আত্মাকে ভগবানের দিকে টানে।</p>
 HTML
-      ],
-      [
-        'title' => 'ভক্তি যোগ: আত্মার সঙ্গে ভগবানের সংযোগ',
-        'slug' => 'bhakti-yoga-path-to-god',
-        'content' => <<<HTML
+            ],
+            [
+                'title' => 'ভক্তি যোগ: আত্মার সঙ্গে ভগবানের সংযোগ',
+                'slug' => 'bhakti-yoga-path-to-god',
+                'content' => <<<'HTML'
 <h2>ভক্তি যোগ কী?</h2>
 <p>ভক্তি যোগ মানে হৃদয় দিয়ে ভগবানের সেবা ও স্মরণ। এটি <strong>আত্মার সঙ্গে ভগবানের সম্পর্ক পুনঃপ্রতিষ্ঠার</strong> পথ।</p>
 
@@ -131,11 +131,11 @@ HTML
 
 <p>ISKCON-এ ভক্তি যোগ অনুশীলন করা হয় গীতার নির্দেশ অনুযায়ী, যেখানে আত্মা নিজের প্রকৃত অবস্থায় ফিরে আসে ভগবানের সেবায় নিয়োজিত হয়ে।</p>
 HTML
-      ],
-      [
-        'title' => 'একাদশী ব্রত ও এর মাহাত্ম্য',
-        'slug' => 'ekadashi-vrata-glory',
-        'content' => <<<HTML
+            ],
+            [
+                'title' => 'একাদশী ব্রত ও এর মাহাত্ম্য',
+                'slug' => 'ekadashi-vrata-glory',
+                'content' => <<<'HTML'
 <h2>একাদশী ব্রত কী?</h2>
 <p>একাদশী ব্রত হল বৈষ্ণব ধর্মে অন্যতম গুরুত্বপূর্ণ উপবাসের দিন। প্রতি মাসে দুটি একাদশী হয় — শুক্ল ও কৃষ্ণ পক্ষের একাদশী।</p>
 
@@ -148,11 +148,11 @@ HTML
 
 <p>ISKCON-এ একাদশী উপলক্ষে বিশেষ কীর্তন, পাঠ ও উপবাস পালন করা হয়।</p>
 HTML
-      ],
-      [
-        'title' => 'বৃন্দাবন ধামের মাহাত্ম্য',
-        'slug' => 'vrindavan-dham-glory',
-        'content' => <<<HTML
+            ],
+            [
+                'title' => 'বৃন্দাবন ধামের মাহাত্ম্য',
+                'slug' => 'vrindavan-dham-glory',
+                'content' => <<<'HTML'
 <h2>বৃন্দাবন - শ্রীকৃষ্ণের লীলাভূমি</h2>
 <p>বৃন্দাবন উত্তর প্রদেশে অবস্থিত একটি পবিত্র স্থান যেখানে শ্রীকৃষ্ণ তাঁর শৈশব ও কৈশোর লীলা সম্পাদন করেন।</p>
 
@@ -165,11 +165,11 @@ HTML
 
 <p>ভক্তরা এখানে এসে গভীরভাবে কৃষ্ণভক্তি অনুভব করেন এবং কীর্তন, সাধনা ও দর্শনের মাধ্যমে আত্মিক শান্তি লাভ করেন।</p>
 HTML
-      ],
-      [
-        'title' => 'গীতার শিক্ষা ও আমাদের জীবন',
-        'slug' => 'gita-teachings-in-life',
-        'content' => <<<HTML
+            ],
+            [
+                'title' => 'গীতার শিক্ষা ও আমাদের জীবন',
+                'slug' => 'gita-teachings-in-life',
+                'content' => <<<'HTML'
 <h2>ভগবদ্গীতা: চিরন্তন জ্ঞান</h2>
 <p>ভগবদ্গীতা হল শ্রীকৃষ্ণ কর্তৃক অর্জুনকে প্রদানকৃত এক অপূর্ব আধ্যাত্মিক জ্ঞান। এটি আত্মা, ধর্ম, কর্ম ও ভক্তির গভীর ব্যাখ্যা প্রদান করে।</p>
 
@@ -182,11 +182,11 @@ HTML
 
 <p>ISKCON-এ গীতা পাঠ ও আলোচনা নিয়মিত হয় যাতে ভক্তরা জীবনে এই জ্ঞান বাস্তবায়ন করতে পারেন।</p>
 HTML
-      ],
-      [
-        'title' => 'রথযাত্রা উৎসবের আধ্যাত্মিক তাৎপর্য',
-        'slug' => 'rathayatra-spiritual-significance',
-        'content' => <<<HTML
+            ],
+            [
+                'title' => 'রথযাত্রা উৎসবের আধ্যাত্মিক তাৎপর্য',
+                'slug' => 'rathayatra-spiritual-significance',
+                'content' => <<<'HTML'
 <h2>রথযাত্রা: ভক্তি ও উল্লাসের উৎসব</h2>
 <p>রথযাত্রা হল জগন্নাথ দেবের বার্ষিক রথযাত্রা উৎসব যা পুরী সহ বিশ্বের নানা প্রান্তে উদযাপন করা হয়। ISKCON এই উৎসব বিশ্বব্যাপী আয়োজন করে।</p>
 
@@ -199,14 +199,14 @@ HTML
 
 <p>এই উৎসবের মাধ্যমে ভক্তরা সরাসরি ঈশ্বরকে রথে টেনে আনার সৌভাগ্য লাভ করেন, যা আত্মার উন্নয়নে সহায়ক।</p>
 HTML
-      ],
-    ];
+            ],
+        ];
 
-    \App\Models\Article::factory()->createManyQuietly($articles);
+        \App\Models\Article::factory()->createManyQuietly($articles);
 
-    \App\Models\Article::factory(2000)->create();
-    \App\Models\Article::factory(3000)->create();
-    \App\Models\Article::factory(5000)->create();
-    \App\Models\Article::factory(4000)->create();
-  }
+        \App\Models\Article::factory(2000)->create();
+        \App\Models\Article::factory(3000)->create();
+        \App\Models\Article::factory(5000)->create();
+        \App\Models\Article::factory(4000)->create();
+    }
 }

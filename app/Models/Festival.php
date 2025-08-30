@@ -22,7 +22,7 @@ class Festival extends Model
         'user_id',
         'is_active',
         'url',
-        'is_external'
+        'is_external',
     ];
 
     protected $casts = [

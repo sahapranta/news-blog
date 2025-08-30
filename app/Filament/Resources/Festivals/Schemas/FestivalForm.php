@@ -3,18 +3,18 @@
 namespace App\Filament\Resources\Festivals\Schemas;
 
 use App\Models\Article;
-use Illuminate\Support\Str;
-use Filament\Schemas\Schema;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Group;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
-use Filament\Forms\Components\DatePicker;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
+use Illuminate\Support\Str;
 
 class FestivalForm
 {
@@ -23,7 +23,7 @@ class FestivalForm
         return $schema
             ->components([
                 Grid::make([
-                    'md' => 5
+                    'md' => 5,
                 ])
                     ->schema([
                         Section::make()
@@ -32,7 +32,7 @@ class FestivalForm
                                     ->live()
                                     ->maxLength(255)
                                     ->debounce(700)
-                                    ->afterStateUpdated(fn(Get $get, Set $set, $state) => $get('slug') ?: $set('slug', Str::slug($state)))
+                                    ->afterStateUpdated(fn (Get $get, Set $set, $state) => $get('slug') ?: $set('slug', Str::slug($state)))
                                     ->required(),
                                 TextInput::make('slug')
                                     ->maxLength(255)
@@ -44,20 +44,20 @@ class FestivalForm
                                 Select::make('url')
                                     ->label('Article Link')
                                     ->options(
-                                        fn($state): array => Article::limit(6)
-                                            ->when($state, fn($q) => $q->where('slug', 'like', "%{$state}%"))
+                                        fn ($state): array => Article::limit(6)
+                                            ->when($state, fn ($q) => $q->where('slug', 'like', "%{$state}%"))
                                             ->orWhere('is_verified', true)
                                             ->pluck('title', 'slug')
                                             ->toArray()
                                     )
                                     ->getSearchResultsUsing(
-                                        fn(string $search): array => Article::limit(6)
+                                        fn (string $search): array => Article::limit(6)
                                             ->where('title', 'like', "%{$search}%")
                                             ->verified()
                                             ->pluck('title', 'slug')
                                             ->all()
                                     )
-                                    ->hidden(fn(Get $get) => $get('is_external'))
+                                    ->hidden(fn (Get $get) => $get('is_external'))
                                     ->searchable(),
                                 Toggle::make('is_external')
                                     ->label('External')
@@ -69,7 +69,7 @@ class FestivalForm
                                 TextInput::make('url')
                                     ->label('Link')
                                     ->url()
-                                    ->visible(fn(Get $get) => $get('is_external'))
+                                    ->visible(fn (Get $get) => $get('is_external'))
                                     ->maxLength(255),
                             ])
                             ->columnSpan(3),

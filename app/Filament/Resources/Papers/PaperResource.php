@@ -2,35 +2,33 @@
 
 namespace App\Filament\Resources\Papers;
 
-use App\Models\Paper;
-use Filament\Tables\Table;
-use Illuminate\Support\Str;
-use Filament\Schemas\Schema;
-use Filament\Actions\EditAction;
-use Filament\Resources\Resource;
-use Filament\Support\Icons\Heroicon;
-use Filament\Actions\BulkActionGroup;
-use Filament\Schemas\Components\Grid;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Forms\Components\Textarea;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Section;
-use Filament\Forms\Components\FileUpload;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Utilities\Set;
+use App\Filament\Resources\Papers\Pages\CreatePaper;
 use App\Filament\Resources\Papers\Pages\EditPaper;
 use App\Filament\Resources\Papers\Pages\ListPapers;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\Papers\Pages\CreatePaper;
+use App\Models\Paper;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\Resource;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Illuminate\Support\Str;
 
 class PaperResource extends Resource
 {
     protected static ?string $model = Paper::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = Heroicon::Newspaper;
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::Newspaper;
 
     public static function form(Schema $schema): Schema
     {
@@ -43,7 +41,7 @@ class PaperResource extends Resource
                                 TextInput::make('title')
                                     ->live(true)
                                     ->maxLength(255)
-                                    ->afterStateUpdated(fn(Set $set, Get $get, $state) => $get('slug') ?: $set('slug', Str::slug($state)))
+                                    ->afterStateUpdated(fn (Set $set, Get $get, $state) => $get('slug') ?: $set('slug', Str::slug($state)))
                                     ->required(),
                                 TextInput::make('slug')
                                     ->unique(Paper::class, 'slug', ignoreRecord: true)

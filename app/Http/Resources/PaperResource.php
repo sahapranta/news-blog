@@ -22,7 +22,7 @@ class PaperResource extends JsonResource
             'download_count' => $this->download_count,
             'created_at' => $this->created_at,
             'media' => $this->whenLoaded('media', function () {
-                return $this->media->map(fn($media) => [
+                return $this->media->map(fn ($media) => [
                     'name' => $media->file_name,
                     'order' => $media->order_column ?? 0,
                     'url' => $media->original_url,

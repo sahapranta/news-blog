@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-use App\Models\Paper;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Resources\PaperResource;
+use App\Models\Paper;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\Response;
 
 class PaperController extends Controller
 {
     public function index(Request $request)
     {
-        $paper = Paper::with(['media' => fn($q) => $q->orderBy('order_column', 'desc')])
+        $paper = Paper::with(['media' => fn ($q) => $q->orderBy('order_column', 'desc')])
             ->latest()
             ->firstOrFail();
 
@@ -22,21 +22,21 @@ class PaperController extends Controller
 
         return Inertia::render('paper/index', [
             'papers' => PaperResource::collection(
-                Paper::when($paper?->id, fn($q, $s) => $q->whereNot('id', $s))
+                Paper::when($paper?->id, fn ($q, $s) => $q->whereNot('id', $s))
                     ->latest('id')
-                    ->when($search, fn($q, $s) => $q->where('title', 'like', "%$s%")->orWhere('description', 'like', "%$s%"))
+                    ->when($search, fn ($q, $s) => $q->where('title', 'like', "%$s%")->orWhere('description', 'like', "%$s%"))
                     ->paginate(10),
             ),
             'paper' => $paper ? new PaperResource($paper) : null,
             'filters' => [
                 'search' => $search,
-            ]
+            ],
         ]);
     }
 
     public function view(Paper $paper)
     {
-        $paper->load(['media' => fn($q) => $q->orderBy('order_column', 'desc')]);
+        $paper->load(['media' => fn ($q) => $q->orderBy('order_column', 'desc')]);
 
         return Inertia::render('paper/view', [
             'paper' => new PaperResource($paper),
@@ -48,7 +48,7 @@ class PaperController extends Controller
         $filePath = $paper->pdf_url;
         $disk = Storage::disk('local');
 
-        if (!$disk->exists($filePath)) {
+        if (! $disk->exists($filePath)) {
             abort(Response::HTTP_NOT_FOUND, 'File not found.');
         }
 

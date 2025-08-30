@@ -2,37 +2,32 @@
 
 namespace App\Filament\Resources\Comments;
 
-use Filament\Schemas\Schema;
+use App\Filament\Resources\Comments\Pages\ManageComments;
+use App\Models\Comment;
+use Filament\Actions\Action;
+use Filament\Actions\BulkAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Filters\Filter;
-use Filament\Actions\Action;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\BulkAction;
-use Filament\Actions\DeleteBulkAction;
-use App\Filament\Resources\Comments\Pages\ManageComments;
-use Filament\Forms;
-use Filament\Tables;
-use App\Models\Comment;
-use Filament\Tables\Table;
-use Illuminate\Support\Str;
 use Filament\Resources\Resource;
-use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\CommentResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\CommentResource\RelationManagers;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Grouping\Group;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 
 class CommentResource extends Resource
 {
     protected static ?string $model = Comment::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Schema $schema): Schema
     {
@@ -63,7 +58,7 @@ class CommentResource extends Resource
                 TextColumn::make('user.name'),
                 TextColumn::make('commentable.title')
                     ->label('Comment')
-                    ->description(fn(Comment $record) => Str::of($record->body)?->substr(0, 50) . '...'),
+                    ->description(fn (Comment $record) => Str::of($record->body)?->substr(0, 50).'...'),
                 IconColumn::make('is_verified')
                     ->label('Verified')
                     ->boolean(),
@@ -77,19 +72,19 @@ class CommentResource extends Resource
             ])
             ->filters([
                 Filter::make('verified')
-                    ->query(fn(Builder $query) => $query->where('is_verified', true))
+                    ->query(fn (Builder $query) => $query->where('is_verified', true))
                     ->label('Verified'),
                 Filter::make('is_verified')
-                    ->query(fn(Builder $query) => $query->where('is_verified', false))
+                    ->query(fn (Builder $query) => $query->where('is_verified', false))
                     ->label('Non Verified')
                     ->default(),
             ])
             ->recordActions([
                 Action::make('verify')
-                    ->action(fn(Comment $record) => $record->update(['is_verified' => true]))
+                    ->action(fn (Comment $record) => $record->update(['is_verified' => true]))
                     ->requiresConfirmation()
                     ->color('info')
-                    ->visible(fn(Comment $record) => !$record->is_verified)
+                    ->visible(fn (Comment $record) => ! $record->is_verified)
                     ->icon('heroicon-o-check'),
                 EditAction::make(),
                 DeleteAction::make(),
@@ -97,13 +92,13 @@ class CommentResource extends Resource
             ->groups([
                 Group::make('commentable_id')
                     ->titlePrefixedWithLabel(false)
-                    ->getTitleFromRecordUsing(fn($record): string => $record->commentable->title)
-                    ->getDescriptionFromRecordUsing(fn($record): string => ucfirst($record->commentable_type)),
+                    ->getTitleFromRecordUsing(fn ($record): string => $record->commentable->title)
+                    ->getDescriptionFromRecordUsing(fn ($record): string => ucfirst($record->commentable_type)),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     BulkAction::make('verify')
-                        ->action(fn($records) => $records->each(fn(Comment $record) => $record->update(['is_verified' => true])))
+                        ->action(fn ($records) => $records->each(fn (Comment $record) => $record->update(['is_verified' => true])))
                         ->requiresConfirmation()
                         ->color('info')
                         ->icon('heroicon-o-check'),

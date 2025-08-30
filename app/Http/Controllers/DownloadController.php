@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
-use App\Models\Paper;
-use Illuminate\Http\Request;
 use App\Http\Resources\PaperResource;
+use App\Models\Paper;
 use Illuminate\Support\Facades\URL;
+use Inertia\Inertia;
 
 class DownloadController extends Controller
 {

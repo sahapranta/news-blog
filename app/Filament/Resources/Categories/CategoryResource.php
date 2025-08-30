@@ -2,36 +2,30 @@
 
 namespace App\Filament\Resources\Categories;
 
-use Filament\Forms;
-use Filament\Tables;
+use App\Filament\Resources\Categories\Pages\ManageCategories;
 use App\Models\Category;
-use Filament\Tables\Table;
-use Illuminate\Support\Str;
-use Filament\Schemas\Schema;
-use Filament\Actions\EditAction;
-use Filament\Resources\Resource;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\BulkActionGroup;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Resources\Resource;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Schemas\Components\Utilities\Set;
-use App\Filament\Resources\CategoryResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\Categories\Pages\ManageCategories;
-use App\Filament\Resources\CategoryResource\RelationManagers;
-use Filament\Schemas\Components\Utilities\Get;
+use Filament\Tables\Table;
+use Illuminate\Support\Str;
 
 class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Schema $schema): Schema
     {
@@ -40,7 +34,7 @@ class CategoryResource extends Resource
                 TextInput::make('title')
                     ->maxLength(255)
                     ->live(true)
-                    ->afterStateUpdated(fn(Set $set, Get $get, $state) => $get('slug') ?: $set('slug', Str::slug($state)))
+                    ->afterStateUpdated(fn (Set $set, Get $get, $state) => $get('slug') ?: $set('slug', Str::slug($state)))
                     ->required(),
                 TextInput::make('slug')
                     ->unique(Category::class, 'slug', ignoreRecord: true)

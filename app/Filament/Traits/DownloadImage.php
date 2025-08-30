@@ -2,9 +2,9 @@
 
 namespace App\Filament\Traits;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 trait DownloadImage
 {
@@ -17,7 +17,7 @@ trait DownloadImage
 
         if ($response->successful()) {
             $extension = pathinfo(parse_url($image_url, PHP_URL_PATH), PATHINFO_EXTENSION) ?: 'jpg';
-            $filename = $download_path . Str::ulid() . '.' . $extension;
+            $filename = $download_path.Str::ulid().'.'.$extension;
 
             Storage::disk($disk)->put($filename, $response->body());
 

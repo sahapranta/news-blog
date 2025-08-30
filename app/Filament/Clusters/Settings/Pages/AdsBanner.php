@@ -2,40 +2,39 @@
 
 namespace App\Filament\Clusters\Settings\Pages;
 
-use Throwable;
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Section;
-use Filament\Actions\Action;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Group;
-use Filament\Forms\Components\ToggleButtons;
-use Filament\Forms\Components\Toggle;
-use Filament\Forms;
-use App\Models\Setting;
-use Filament\Forms\Get;
-use Filament\Pages\Page;
-use App\Services\AppSettings;
 use App\Filament\Clusters\Settings\SettingsCluster;
-use Illuminate\Support\Facades\App;
-use Filament\Notifications\Notification;
+use App\Models\Setting;
+use App\Services\AppSettings;
+use Filament\Actions\Action;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Notifications\Notification;
+use Filament\Pages\Page;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Throwable;
 
 class AdsBanner extends Page
 {
     use InteractsWithForms;
 
-    protected static string | \BackedEnum | null $navigationIcon = Heroicon::ArrowDownOnSquareStack;
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::ArrowDownOnSquareStack;
 
     protected string $view = 'filament.clusters.settings.pages.ads-banner';
 
     protected static ?string $cluster = SettingsCluster::class;
 
     public array $horizontal_ads = [];
+
     public array $vertical_ads = [];
+
     public array $top_ads = [];
 
     public function mount(): void
@@ -145,12 +144,12 @@ class AdsBanner extends Page
                                     ->label('Active')
                                     ->default(true),
                             ])
-                            ->itemLabel(fn(array $state) => $state['title'] ?? 'Banner Item')
-                            ->collapseAllAction(fn(Action $action) => $action->hidden())
-                            ->expandAllAction(fn(Action $action) => $action->hidden())
+                            ->itemLabel(fn (array $state) => $state['title'] ?? 'Banner Item')
+                            ->collapseAllAction(fn (Action $action) => $action->hidden())
+                            ->expandAllAction(fn (Action $action) => $action->hidden())
                             ->maxItems(8)
                             ->collapsed()
-                            ->hiddenLabel()
+                            ->hiddenLabel(),
                     ]),
                 Section::make('Top Ads')
                     ->description('Choose top ads')
@@ -199,7 +198,7 @@ class AdsBanner extends Page
                             ])
                             ->columns(3)
                             ->hiddenLabel()
-                            ->maxItems(1)
+                            ->maxItems(1),
                     ]),
                 Section::make('Vertical Banner Ads')
                     ->description('Choose vertical banner ads for sidebar')
@@ -239,12 +238,12 @@ class AdsBanner extends Page
                                     ->visibility('public')
                                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/gif', 'image/webp'])
                                     ->maxSize(2048)
-                                    ->hiddenLabel(), // 2MB max                                
-                            ])                            
+                                    ->hiddenLabel(), // 2MB max
+                            ])
                             ->columns(4)
                             ->maxItems(1)
                             ->collapsible()
-                            ->hiddenLabel()
+                            ->hiddenLabel(),
                     ]),
             ]);
     }

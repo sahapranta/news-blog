@@ -2,9 +2,8 @@
 
 namespace App\Filament\Resources\Books\Pages;
 
-use Filament\Actions\CreateAction;
 use App\Filament\Resources\Books\BookResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListBooks extends ListRecords

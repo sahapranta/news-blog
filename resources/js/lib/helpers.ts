@@ -1,10 +1,7 @@
 export const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
 export const url = (path = '') => `${import.meta.env.VITE_APP_URL || ''}${path}`;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function debounce<T extends (...args: any[]) => void>(
-    func: T,
-    wait: number
-): (...args: Parameters<T>) => void {
+export function debounce<T extends (...args: any[]) => void>(func: T, wait: number): (...args: Parameters<T>) => void {
     let timeout: ReturnType<typeof setTimeout>;
 
     return function (...args: Parameters<T>) {
@@ -15,8 +12,16 @@ export function debounce<T extends (...args: any[]) => void>(
 
 export function numberMapper(value: string): string {
     const map: Record<string, string> = {
-        '০': '0', '১': '1', '২': '2', '৩': '3', '৪': '4',
-        '৫': '5', '৬': '6', '৭': '7', '৮': '8', '৯': '9',
+        '০': '0',
+        '১': '1',
+        '২': '2',
+        '৩': '3',
+        '৪': '4',
+        '৫': '5',
+        '৬': '6',
+        '৭': '7',
+        '৮': '8',
+        '৯': '9',
         ' ': '',
     };
 
@@ -26,7 +31,7 @@ export function numberMapper(value: string): string {
 export function bnNum(value: string | number): string {
     if (value === null || value === undefined || value === '') return '';
 
-    if (typeof value === "number") {
+    if (typeof value === 'number') {
         value = value.toString();
     }
 
@@ -36,7 +41,6 @@ export function bnNum(value: string | number): string {
 
     return value
         .split('')
-        .map(v => num[parseInt(v, 10)])
+        .map((v) => num[parseInt(v, 10)])
         .join('');
 }
-

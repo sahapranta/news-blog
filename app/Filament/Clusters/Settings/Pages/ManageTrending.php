@@ -2,27 +2,27 @@
 
 namespace App\Filament\Clusters\Settings\Pages;
 
-use Filament\Schemas\Components\Grid;
-use Throwable;
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Section;
-use Filament\Actions\Action;
-use Filament\Forms\Components\Select;
 use App\Filament\Clusters\Settings\SettingsCluster;
 use App\Models\Article;
 use App\Models\Setting;
 use App\Services\AppSettings;
+use Filament\Actions\Action;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Throwable;
 
 class ManageTrending extends Page
 {
     use InteractsWithForms;
 
-    protected static string | \BackedEnum | null $navigationIcon = Heroicon::ArrowTrendingUp; // 'heroicon-o-document-text'
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::ArrowTrendingUp; // 'heroicon-o-document-text'
 
     protected string $view = 'filament.clusters.settings.pages.manage-trending';
 
@@ -31,8 +31,11 @@ class ManageTrending extends Page
     protected static ?string $title = 'Trending News';
 
     public ?array $trending = [];
+
     public ?array $popular = [];
+
     public ?string $featured = '';
+
     public ?Article $featuredArticle = null;
 
     public function mount(): void
@@ -63,12 +66,14 @@ class ManageTrending extends Page
     {
         $articles = Article::whereIn('id', $this->{$key})->get();
 
-        if ($articles->isEmpty()) return [];
+        if ($articles->isEmpty()) {
+            return [];
+        }
 
         $placeholders = [];
 
         foreach ($articles as $article) {
-            $placeholders[] = TextEntry::make('article' . $article->id)
+            $placeholders[] = TextEntry::make('article'.$article->id)
                 ->view('filament.featured-article-placeholder', ['article' => $article, 'small' => true]);
         }
 
@@ -81,7 +86,7 @@ class ManageTrending extends Page
                 ])
                     ->schema([
                         ...$placeholders,
-                    ])
+                    ]),
             ];
         }
 
@@ -131,7 +136,7 @@ class ManageTrending extends Page
             $settings->options = $value;
             $settings->save();
             Notification::make()
-                ->title(ucfirst($key) . ' news saved')
+                ->title(ucfirst($key).' news saved')
                 ->body('The news has been saved.')
                 ->success()
                 ->send();
@@ -161,7 +166,6 @@ class ManageTrending extends Page
             ->toArray();
     }
 
-
     public function form(Schema $schema): Schema
     {
         return $schema
@@ -178,14 +182,14 @@ class ManageTrending extends Page
                     ->schema([
                         Select::make('featured')
                             ->options($this->getDefaultOptions())
-                            ->getSearchResultsUsing(fn(string $search): array => self::getSearchResult($search))
+                            ->getSearchResultsUsing(fn (string $search): array => self::getSearchResult($search))
                             ->searchable()
                             ->live()
-                            ->afterStateUpdated(fn() => $this->fetchFeaturedArticle())
+                            ->afterStateUpdated(fn () => $this->fetchFeaturedArticle())
                             ->required()
                             ->hiddenLabel(),
                         TextEntry::make('placeholder')
-                            ->view('filament.featured-article-placeholder', ['article' => $this->featuredArticle])
+                            ->view('filament.featured-article-placeholder', ['article' => $this->featuredArticle]),
                     ]),
                 Section::make('Trending News')
                     ->description('Choose Trending news')
@@ -193,11 +197,12 @@ class ManageTrending extends Page
                         Select::make('trending')
                             ->options(function ($get) {
                                 $selected = collect($get('trending') ?? []);
+
                                 return Article::whereIn('id', $selected)
                                     ->pluck('title', 'id')
                                     ->toArray();
                             })
-                            ->getSearchResultsUsing(fn(string $search): array => self::getSearchResult($search))                            
+                            ->getSearchResultsUsing(fn (string $search): array => self::getSearchResult($search))
                             ->multiple()
                             ->searchable()
                             ->searchDebounce(750)
@@ -218,11 +223,12 @@ class ManageTrending extends Page
                         Select::make('popular')
                             ->options(function ($get) {
                                 $selected = collect($get('popular') ?? []);
+
                                 return Article::whereIn('id', $selected)
                                     ->pluck('title', 'id')
                                     ->toArray();
                             })
-                            ->getSearchResultsUsing(fn(string $search): array => self::getSearchResult($search))                            
+                            ->getSearchResultsUsing(fn (string $search): array => self::getSearchResult($search))
                             ->multiple()
                             ->searchable()
                             ->searchDebounce(750)

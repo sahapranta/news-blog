@@ -27,7 +27,7 @@ class FestivalResource extends JsonResource
             'time' => $this->time,
             'short_description' => $this->short_description,
             $this->mergeWhen($this->image, [
-                'image_url' => $this->image_url
+                'image_url' => $this->image_url,
             ]),
         ];
     }

@@ -2,37 +2,37 @@
 
 namespace App\Filament\Clusters\Settings\Pages;
 
-use Throwable;
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Section;
-use Filament\Actions\Action;
-use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Utilities\Set;
-use Filament\Forms\Components\ToggleButtons;
-use Filament\Schemas\Components\Utilities\Get;
-use Filament\Forms;
+use App\Filament\Clusters\Settings\SettingsCluster;
 use App\Models\Article;
 use App\Models\Setting;
-use Filament\Pages\Page;
-use App\Filament\Clusters\Settings\SettingsCluster;
 use App\Services\AppSettings;
-use Filament\Notifications\Notification;
+use Filament\Actions\Action;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Notifications\Notification;
+use Filament\Pages\Page;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Throwable;
 
 class ManageTicker extends Page
 {
     use InteractsWithForms;
 
-    protected static string | \BackedEnum | null $navigationIcon = Heroicon::Ticket;
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::Ticket;
 
     protected string $view = 'filament.clusters.settings.pages.manage-ticker';
 
     protected static ?string $cluster = SettingsCluster::class;
 
     public ?array $options = [];
+
     public bool $is_active = false;
 
     public function mount(): void
@@ -76,7 +76,7 @@ class ManageTicker extends Page
     {
         $article = Article::where('title', 'like', "%$title%")->first();
 
-        if (!$article) {
+        if (! $article) {
             Notification::make()
                 ->title('Article not found')
                 ->body("We couldn't find an article with the title <strong>$title</strong>.")
@@ -117,8 +117,7 @@ class ManageTicker extends Page
                             ->schema([
                                 TextInput::make('title')
                                     ->suffixAction(
-                                        fn($state, Set $set) =>
-                                        Action::make('search-article')
+                                        fn ($state, Set $set) => Action::make('search-article')
                                             ->label('Search')
                                             ->icon('heroicon-o-magnifying-glass')
                                             ->action(function () use ($state, $set) {
@@ -146,20 +145,20 @@ class ManageTicker extends Page
                                     ->options($this->targets())
                                     ->inline()
                                     ->inlineLabel()
-                                    ->visible(fn(Get $get) => $get('out'))
+                                    ->visible(fn (Get $get) => $get('out'))
                                     ->default('_self'),
                             ])
-                            ->itemLabel(fn(array $state) => $state['title'] ?? 'New Item')
-                            ->collapseAllAction(fn(Action $action) => $action->hidden())
-                            ->expandAllAction(fn(Action $action) => $action->hidden())
+                            ->itemLabel(fn (array $state) => $state['title'] ?? 'New Item')
+                            ->collapseAllAction(fn (Action $action) => $action->hidden())
+                            ->expandAllAction(fn (Action $action) => $action->hidden())
                             ->collapsed()
                             ->truncateItemLabel()
                             ->maxItems(10)
                             ->minItems(1)
                             ->hiddenLabel()
                             ->defaultItems(1)
-                            ->deleteAction(fn(Action $action) => $action->requiresConfirmation())
-                    ])
+                            ->deleteAction(fn (Action $action) => $action->requiresConfirmation()),
+                    ]),
             ]);
     }
 }

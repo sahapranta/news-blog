@@ -1,10 +1,9 @@
 import HomeLayout from '@/layouts/home-layout';
-import React from 'react';
 
 const BlankPage = () => {
     return (
         <HomeLayout>
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-center">
                     {/* <h1 className="text-2xl font-bold text-gray-800">This is a blank page</h1> */}
                     <img src="/images/bkash-system.webp" alt="User" className="" />
@@ -15,5 +14,5 @@ const BlankPage = () => {
             </main>
         </HomeLayout>
     );
-}
+};
 export default BlankPage;

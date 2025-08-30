@@ -12,20 +12,18 @@ interface HomeLayoutProps {
 
 export default ({ children, heading, hasSidebar = false, ...props }: HomeLayoutProps) => (
     <HomeLayoutTemplate {...props}>
-        {hasSidebar ?
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {hasSidebar ? (
+            <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
                 {heading && heading}
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                    <div className="lg:col-span-3">
-                        {children}
-                    </div>
+                <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
+                    <div className="lg:col-span-3">{children}</div>
                     <div className="lg:col-span-1">
                         <Sidebar />
                     </div>
                 </div>
             </main>
-            :
+        ) : (
             children
-        }
+        )}
     </HomeLayoutTemplate>
 );

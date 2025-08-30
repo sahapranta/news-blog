@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Books\Pages;
 
 use App\Filament\Resources\Books\BookResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateBook extends CreateRecord

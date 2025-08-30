@@ -30,10 +30,10 @@ const ViewPage: React.FC<{ festival: FestivalProps }> = ({ festival }) => {
         } else {
             navigator.clipboard.writeText(url);
             toast.success('Link copied to clipboard', {
-                description: url
+                description: url,
             });
         }
-    }
+    };
     return (
         <HomeLayout>
             <Head>
@@ -41,42 +41,54 @@ const ViewPage: React.FC<{ festival: FestivalProps }> = ({ festival }) => {
                 <meta name="description" content={festival.short_description} />
                 <title>{festival.title}</title>
             </Head>
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <div className="mb-6 flex md:items-center justify-between sm:flex-row flex-col border-red-600 border-b-4 pb-4">
-                    <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-                        {festival.title}
-                    </h1>
+            <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+                <div className="mb-6 flex flex-col justify-between border-b-4 border-red-600 pb-4 sm:flex-row md:items-center">
+                    <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{festival.title}</h1>
                     <div className="flex items-center space-x-2 pt-3 sm:pt-0">
                         {/* share buttons */}
-                        <button onClick={share} className="flex items-center space-x-2 bg-red-600 text-white px-2.5 py-1.5 rounded-lg hover:bg-red-700 transition-colors text-xs" aria-label="Share">
-                            <Share2Icon className="w-4 h-4" />
+                        <button
+                            onClick={share}
+                            className="flex items-center space-x-2 rounded-lg bg-red-600 px-2.5 py-1.5 text-xs text-white transition-colors hover:bg-red-700"
+                            aria-label="Share"
+                        >
+                            <Share2Icon className="h-4 w-4" />
                             <span>শেয়ার করুন</span>
                         </button>
-                        <a href={`https://www.facebook.com/sharer/sharer.php?u=${route('festival.view', { festival: festival.slug })}`}
-                            className="flex items-center space-x-2 bg-[#3b5999] text-white px-2.5 py-1.5 rounded-lg hover:bg-blue-700 transition-colors text-xs" target="_blank">
-                            <FacebookIcon className="w-4 h-4" />
+                        <a
+                            href={`https://www.facebook.com/sharer/sharer.php?u=${route('festival.view', { festival: festival.slug })}`}
+                            className="flex items-center space-x-2 rounded-lg bg-[#3b5999] px-2.5 py-1.5 text-xs text-white transition-colors hover:bg-blue-700"
+                            target="_blank"
+                        >
+                            <FacebookIcon className="h-4 w-4" />
                             <span>Facebook</span>
                         </a>
-                        <a href={`https://twitter.com/intent/tweet?url=${route('festival.view', { festival: festival.slug })}&text=${festival.title}`}
-                            className="flex items-center space-x-2 bg-[#55acee] text-white px-2.5 py-1.5 rounded-lg hover:bg-sky-700 transition-colors text-xs" rel="noopener noreferrer">
-                            <TwitterIcon className="w-4 h-4" />
+                        <a
+                            href={`https://twitter.com/intent/tweet?url=${route('festival.view', { festival: festival.slug })}&text=${festival.title}`}
+                            className="flex items-center space-x-2 rounded-lg bg-[#55acee] px-2.5 py-1.5 text-xs text-white transition-colors hover:bg-sky-700"
+                            rel="noopener noreferrer"
+                        >
+                            <TwitterIcon className="h-4 w-4" />
                             <span>Twitter</span>
                         </a>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
                     <div className="lg:col-span-3">
                         <article className="mt-2">
-                            <div className="rounded-lg shadow-sm overflow-hidden mb-6">
+                            <div className="mb-6 overflow-hidden rounded-lg shadow-sm">
                                 <Img
                                     src={festival.image}
                                     alt={`${festival.name} | হরেকৃষ্ণ সমাচার`}
-                                    className="w-full h-64 md:h-100 object-cover"
+                                    className="h-64 w-full object-cover md:h-100"
                                     loading="eager"
                                 />
                             </div>
-                            <div className='prose max-w-none text-gray-600 leading-relaxed' dangerouslySetInnerHTML={{ __html: festival.description }} itemProp="articleBody" />
+                            <div
+                                className="prose max-w-none leading-relaxed text-gray-600"
+                                dangerouslySetInnerHTML={{ __html: festival.description }}
+                                itemProp="articleBody"
+                            />
                         </article>
                     </div>
 
@@ -87,5 +99,5 @@ const ViewPage: React.FC<{ festival: FestivalProps }> = ({ festival }) => {
             </main>
         </HomeLayout>
     );
-}
+};
 export default ViewPage;

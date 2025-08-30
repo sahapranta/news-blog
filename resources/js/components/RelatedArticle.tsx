@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 import { route } from 'ziggy-js';
 import NewsCard from './NewsCard';
 
-
 const RelatedArticle: React.FC<{ id?: string }> = ({ id }) => {
     const [articles, setArticles] = React.useState<ArticleProps[]>([]);
 
@@ -23,13 +22,13 @@ const RelatedArticle: React.FC<{ id?: string }> = ({ id }) => {
     if (articles.length === 0) return null;
 
     return (
-        <div className="bg-gradient-to-br from-neutral-200 from-0% via-gray-50 via-50% to-stone-200 to-100% rounded-lg shadow-sm p-6 my-4 relative border-2">
-            <div className="flex items-start justify-between mb-3">
+        <div className="relative my-4 rounded-lg border-2 bg-gradient-to-br from-neutral-200 from-0% via-gray-50 via-50% to-stone-200 to-100% p-6 shadow-sm">
+            <div className="mb-3 flex items-start justify-between">
                 <h2 className="text-lg font-bold text-gray-700">Read More</h2>
             </div>
             <div className="space-y-3">
                 {/* Related Articles */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                     {articles.map((article) => (
                         <NewsCard
                             key={article.id}
@@ -38,7 +37,7 @@ const RelatedArticle: React.FC<{ id?: string }> = ({ id }) => {
                             image_url={article.image_url}
                             category={article.category}
                             time={article.time}
-                            className='ring-6 ring-gray-300/40'
+                            className="ring-6 ring-gray-300/40"
                             size="medium"
                         />
                     ))}

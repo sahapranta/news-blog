@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Rules\Turnstile;
-use App\Http\Controllers\Controller;
 use App\Models\ContactMessage;
+use App\Rules\Turnstile;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -12,13 +11,13 @@ class ContactController extends Controller
     public function __invoke(Request $request)
     {
         $request->validate([
-            'name'    => 'required|string',
-            'email'   => 'required|email',
-            'phone'   => 'required|string',
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required|string',
             'subject' => 'required|string',
             'message' => 'required|string',
             'category' => 'required|string',
-            'turnstile_response' => ['required', new Turnstile()],
+            'turnstile_response' => ['required', new Turnstile],
         ]);
 
         ContactMessage::create([

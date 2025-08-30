@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-
 Route::get('/', [App\Http\Controllers\NewsController::class, 'home'])->name('home');
 Route::get('/news/{article:slug}', [App\Http\Controllers\NewsController::class, 'news'])->name('article.show');
 Route::get('/category/{category:slug}', [App\Http\Controllers\NewsController::class, 'category'])->name('category.show');
@@ -29,19 +28,18 @@ Route::get('/festival', [App\Http\Controllers\EventsController::class, 'index'])
 Route::get('/books', [App\Http\Controllers\BooksController::class, 'index'])->name('book.index');
 Route::get('/book/{slug}', [App\Http\Controllers\BooksController::class, 'read'])->name('book.show');
 
-
 Route::inertia('/profile', 'ProfilePage')->name('profile');
 
 foreach (
     [
-        'about'          => 'about',
-        'contact'        => 'contact',
-        'faq'            => 'faq',
-        'app_download'   => 'app-download',
+        'about' => 'about',
+        'contact' => 'contact',
+        'faq' => 'faq',
+        'app_download' => 'app-download',
         'privacy_policy' => 'privacy-policy',
-        'cookie_policy'  => 'cookie-policy',
-        'usage_policy'   => 'usage-policy',
-        'thank_you'      => 'thank-you',
+        'cookie_policy' => 'cookie-policy',
+        'usage_policy' => 'usage-policy',
+        'thank_you' => 'thank-you',
     ] as $page => $url
 ) {
     Route::get("/{$url}", [App\Http\Controllers\PagesController::class, $page])
@@ -73,5 +71,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // });
 });
 
-require __DIR__ . '/settings.php';
-require __DIR__ . '/auth.php';
+require __DIR__.'/settings.php';
+require __DIR__.'/auth.php';

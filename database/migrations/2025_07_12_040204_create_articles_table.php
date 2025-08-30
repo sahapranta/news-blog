@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Category::class)->constrained();
             $table->boolean('is_verified')->default(false);
             $table->timestamp('published_at')->nullable();
-            $table->unsignedInteger('reading_time')->default(0);             
+            $table->unsignedInteger('reading_time')->default(0);
             $table->string('featured_image')->nullable();
             $table->timestamps();
         });

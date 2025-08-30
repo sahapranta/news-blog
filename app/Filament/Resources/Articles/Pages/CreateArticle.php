@@ -2,12 +2,12 @@
 
 namespace App\Filament\Resources\Articles\Pages;
 
-use Illuminate\Support\Str;
+use App\Filament\Resources\Articles\ArticleResource;
+use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
-use Filament\Resources\Pages\CreateRecord;
-use App\Filament\Resources\Articles\ArticleResource;
+use Illuminate\Support\Str;
 
 class CreateArticle extends CreateRecord
 {
@@ -19,20 +19,20 @@ class CreateArticle extends CreateRecord
     {
         $data['user_id'] = Auth::id();
 
-        if (empty($data['featured_image']) && !empty($data['featured_image_url'])) {
+        if (empty($data['featured_image']) && ! empty($data['featured_image_url'])) {
             try {
                 $response = Http::get($data['featured_image_url']);
 
                 if ($response->successful()) {
                     $extension = pathinfo(parse_url($data['featured_image_url'], PHP_URL_PATH), PATHINFO_EXTENSION) ?: 'jpg';
-                    $filename = 'articles/images/' . Str::uuid() . '.' . $extension;
+                    $filename = 'articles/images/'.Str::uuid().'.'.$extension;
 
                     Storage::disk('public')->put($filename, $response->body());
 
                     $data['featured_image'] = $filename;
                 }
             } catch (\Exception $e) {
-                throw ('Image download failed: ' . $e->getMessage());
+                throw ('Image download failed: '.$e->getMessage());
             }
         }
 

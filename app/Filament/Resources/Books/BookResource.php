@@ -2,33 +2,27 @@
 
 namespace App\Filament\Resources\Books;
 
-use Filament\Schemas\Schema;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Actions\ViewAction;
-use Filament\Actions\EditAction;
+use App\Filament\Resources\Books\Pages\CreateBook;
+use App\Filament\Resources\Books\Pages\EditBook;
+use App\Filament\Resources\Books\Pages\ListBooks;
+use App\Filament\Resources\Books\Pages\ViewBook;
+use App\Models\Book;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use App\Filament\Resources\Books\Pages\ListBooks;
-use App\Filament\Resources\Books\Pages\CreateBook;
-use App\Filament\Resources\Books\Pages\ViewBook;
-use App\Filament\Resources\Books\Pages\EditBook;
-use App\Filament\Resources\BookResource\Pages;
-use App\Filament\Resources\BookResource\RelationManagers;
-use App\Models\Book;
-use Filament\Forms;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BookResource extends Resource
 {
     protected static ?string $model = Book::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Schema $schema): Schema
     {

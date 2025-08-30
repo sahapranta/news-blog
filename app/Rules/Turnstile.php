@@ -2,9 +2,9 @@
 
 namespace App\Rules;
 
-use Closure;
 use App\Services\Cloudflare\TurnstileClient;
 use App\Services\Cloudflare\TurnstileResponse;
+use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 class Turnstile implements ValidationRule
@@ -20,7 +20,7 @@ class Turnstile implements ValidationRule
     {
         $response = $this->client->siteVerify($value);
 
-        if (!$response->isSuccess()) {
+        if (! $response->isSuccess()) {
             $this->handleErrorCodes($response, $fail);
         }
     }

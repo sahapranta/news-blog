@@ -15,9 +15,29 @@ import Sidebar from '@/components/Sidebar';
 import HomeLayout from '@/layouts/home-layout';
 import { Input } from '@/components/ui/input';
 
+type MembershipInterface = {
+  id: string,
+  name: string,
+  email: string,
+  phone: string,
+  address: string,
+  status: string,
+  startDate: string,
+  endDate: string,
+  paymentStatus: string,
+  paymentMethod: string,
+  transactionId: string,
+  deliveryStatus: string,
+  lastDelivery: string,
+  nextDelivery: string,
+  totalIssues: number,
+  deliveredIssues: number,
+  remainingIssues: number
+}
+
 const MembershipStatusPage: React.FC = () => {
   const [membershipId, setMembershipId] = useState('');
-  const [membershipData, setMembershipData] = useState<any>(null);
+  const [membershipData, setMembershipData] = useState<MembershipInterface | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -184,7 +204,7 @@ const MembershipStatusPage: React.FC = () => {
                     type="search"
                     value={membershipId}
                     onChange={(e) => setMembershipId(e.target.value)}
-                    placeholder="আপনার সদস্যপদ আইডি প্রবেশ করান (যেমন: MEM001)"                    
+                    placeholder="আপনার সদস্যপদ আইডি প্রবেশ করান (যেমন: MEM001)"
                     onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                     className="!outline-0 focus:!ring-2 focus:!ring-red-500 h-12"
                   />
@@ -351,8 +371,8 @@ const MembershipStatusPage: React.FC = () => {
                       <div className="flex justify-between">
                         <span className="text-gray-600">পেমেন্ট স্ট্যাটাস:</span>
                         <span className={`px-2 py-1 rounded text-xs font-medium ${membershipData.paymentStatus === 'paid'
-                            ? 'text-green-600 bg-green-100'
-                            : 'text-yellow-600 bg-yellow-100'
+                          ? 'text-green-600 bg-green-100'
+                          : 'text-yellow-600 bg-yellow-100'
                           }`}>
                           {membershipData.paymentStatus === 'paid' ? 'পরিশোধিত' : 'অপেক্ষমাণ'}
                         </span>

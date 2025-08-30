@@ -1,4 +1,4 @@
-import exp from "constants";
+// import exp from "constants";
 
 export interface CategoryProps {
     title: string;
@@ -12,7 +12,7 @@ export interface ArticleProps {
     subtitle?: string;
     slug: string;
     content: string;
-    content_html?:string;
+    content_html?: string;
     readingTime: string;
     excerpt: string;
     image_url: string;
@@ -42,8 +42,7 @@ export interface AuthorProps {
     username: string;
 }
 
-interface FeaturedNewsProps extends Omit<ArticleProps, 'content'> {
-};
+type FeaturedNewsProps = Omit<ArticleProps, 'content'>;
 
 export interface QuotationProps {
     author: string;
@@ -105,4 +104,14 @@ export interface PaperProps {
     updated_at: string;
     download_count: number;
     media?: MediaProps[]
+}
+
+interface ApiError {
+    message?: string;
+    response?: {
+        status?: number;
+        data?: {
+            message?: string;
+        };
+    };
 }

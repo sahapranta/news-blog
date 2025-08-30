@@ -1,52 +1,52 @@
-import React, { useActionState, useEffect, useRef, useState } from 'react';
+import React, { useActionState, useState } from 'react';
 import { Mail, Bell, Smartphone, Loader2Icon } from 'lucide-react';
-import { api } from '@/hooks/use-api';
-import { route } from 'ziggy-js';
+// import { api } from '@/hooks/use-api';
+// import { route } from 'ziggy-js';
 import { Turnstile } from '@marsidev/react-turnstile'
 
 const CTASection: React.FC = () => {
   const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [turnstileResponse, setTurnstileResponse] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
+  const [loading] = useState(false);
+  const [error] = useState<string | null>(null);
+  // const [turnstileResponse, setTurnstileResponse] = useState<string | null>(null);
+  const [success] = useState(false);
   const turnstileKey = document.querySelector('meta[name="turnstile-key"]')?.getAttribute('content');
-  const turnstileWidgetId = useRef<string | null>(null);
+  // const turnstileWidgetId = useRef<string | null>(null);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   }
 
-  const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!email) {
-      setError('Please enter a valid email address.');
-      return;
-    }
+  // const handleSubscribe = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   if (!email) {
+  //     setError('Please enter a valid email address.');
+  //     return;
+  //   }
 
-    setLoading(true);
-    setError(null);
-    setSuccess(false);
+  //   setLoading(true);
+  //   setError(null);
+  //   setSuccess(false);
 
-    try {
+  //   try {
 
-      const { data } = await api.post(route('api.subscription.subscribe'), {
-        email,
-        // 'turnstile-response': response,
-      });
-      if (data.success) {
-        setSuccess(true);
-        setEmail('');
-      } else {
-        setError(data.message || 'Subscription failed. Please try again.');
-      }
-    } catch (err) {
-      console.error('Subscription error:', err);
-      setError('An error occurred while subscribing. Please try again later.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     const { data } = await api.post(route('api.subscription.subscribe'), {
+  //       email,
+  //       // 'turnstile-response': response,
+  //     });
+  //     if (data.success) {
+  //       setSuccess(true);
+  //       setEmail('');
+  //     } else {
+  //       setError(data.message || 'Subscription failed. Please try again.');
+  //     }
+  //   } catch (err) {
+  //     console.error('Subscription error:', err);
+  //     setError('An error occurred while subscribing. Please try again later.');
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   // const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
   //   e.preventDefault();
@@ -60,12 +60,14 @@ const CTASection: React.FC = () => {
   //   }
   // }
 
-  const manageSubscribe = async (state: any, formData: FormData) => {
+  const manageSubscribe = async (state: unknown, formData: FormData) => {
     console.log('Email:', formData.get("email") as string);
     console.log('Turnstile response:', formData.get("cf-turnstile-response") as string);
   }
 
   const [formState, subscribeAction] = useActionState(manageSubscribe, null)
+
+  console.log(formState);
 
   return (
     <section className="bg-gradient-to-r from-red-500 to-red-600 py-16 relative">

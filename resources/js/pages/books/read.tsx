@@ -3,23 +3,28 @@ import { Link } from '@inertiajs/react';
 import {
     ChevronLeft,
     ChevronRight,
-    BookOpen,
     Settings,
     Bookmark,
     Share2,
     Download,
-    Eye,
     Sun,
     Moon,
-    Type,
     Minus,
     Plus,
     Menu
 } from 'lucide-react';
 import FullHomeLayout from '@/layouts/full-home-layout';
 
+type BookInterface = {
+    id: number;
+    title: string;
+    author: string;
+    totalPages: number;
+    chapters: { id: number; title: string; startPage: number }[];
+    content: { [key: number]: string };
+};
+
 const BookReaderPage: React.FC = () => {
-    const id  = 1;
     const [currentPage, setCurrentPage] = useState(1);
     const [fontSize, setFontSize] = useState(16);
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -28,7 +33,7 @@ const BookReaderPage: React.FC = () => {
     const [bookmarks, setBookmarks] = useState<number[]>([]);
 
     // Mock book data
-    const book = {
+    const book: BookInterface = {
         id: 1,
         title: "পদ্মা নদীর মাঝি",
         author: "মানিক বন্দ্যোপাধ্যায়",
@@ -115,8 +120,8 @@ const BookReaderPage: React.FC = () => {
                                 <button
                                     onClick={toggleBookmark}
                                     className={`p-2 rounded-lg transition-colors ${bookmarks.includes(currentPage)
-                                            ? 'text-red-600 bg-red-50'
-                                            : `hover:${isDarkMode ? 'bg-gray-700' : 'bg-gray-100'}`
+                                        ? 'text-red-600 bg-red-50'
+                                        : `hover:${isDarkMode ? 'bg-gray-700' : 'bg-gray-100'}`
                                         }`}
                                 >
                                     <Bookmark className="w-5 h-5" />
@@ -151,8 +156,8 @@ const BookReaderPage: React.FC = () => {
                                         key={chapter.id}
                                         onClick={() => goToChapter(chapter.startPage)}
                                         className={`w-full text-left p-3 rounded-lg transition-colors ${currentPage >= chapter.startPage
-                                                ? 'bg-red-100 text-red-600'
-                                                : `hover:${isDarkMode ? 'bg-gray-700' : 'bg-gray-100'}`
+                                            ? 'bg-red-100 text-red-600'
+                                            : `hover:${isDarkMode ? 'bg-gray-700' : 'bg-gray-100'}`
                                             }`}
                                     >
                                         <div className="font-medium">{chapter.title}</div>
@@ -252,7 +257,7 @@ const BookReaderPage: React.FC = () => {
                             <div
                                 className="prose prose-lg max-w-none leading-relaxed"
                                 style={{ fontSize: `${fontSize}px` }}
-                                dangerouslySetInnerHTML={{ __html: book.content[currentPage] || '<p>পৃষ্ঠা লোড হচ্ছে...</p>' }}                                
+                                dangerouslySetInnerHTML={{ __html: book.content[currentPage] || '<p>পৃষ্ঠা লোড হচ্ছে...</p>' }}
                             />
                         </div>
 
@@ -263,8 +268,8 @@ const BookReaderPage: React.FC = () => {
                                     onClick={prevPage}
                                     disabled={currentPage === 1}
                                     className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${currentPage === 1
-                                            ? 'opacity-50 cursor-not-allowed'
-                                            : `hover:${isDarkMode ? 'bg-gray-700' : 'bg-gray-100'}`
+                                        ? 'opacity-50 cursor-not-allowed'
+                                        : `hover:${isDarkMode ? 'bg-gray-700' : 'bg-gray-100'}`
                                         }`}
                                 >
                                     <ChevronLeft className="w-4 h-4" />
@@ -289,8 +294,8 @@ const BookReaderPage: React.FC = () => {
                                     onClick={nextPage}
                                     disabled={currentPage === book.totalPages}
                                     className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${currentPage === book.totalPages
-                                            ? 'opacity-50 cursor-not-allowed'
-                                            : `hover:${isDarkMode ? 'bg-gray-700' : 'bg-gray-100'}`
+                                        ? 'opacity-50 cursor-not-allowed'
+                                        : `hover:${isDarkMode ? 'bg-gray-700' : 'bg-gray-100'}`
                                         }`}
                                 >
                                     <span>পরবর্তী</span>

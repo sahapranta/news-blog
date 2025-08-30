@@ -1,7 +1,7 @@
 import Sidebar from '@/components/Sidebar';
 import HomeLayoutTemplate from '@/layouts/home/home-header-layout';
 import { type BreadcrumbItem } from '@/types';
-import { JSX, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 interface HomeLayoutProps {
     children: ReactNode;
@@ -10,7 +10,7 @@ interface HomeLayoutProps {
     hasSidebar?: boolean;
 }
 
-export default ({ children, breadcrumbs, heading, hasSidebar = false, ...props }: HomeLayoutProps) => (
+export default ({ children, heading, hasSidebar = false, ...props }: HomeLayoutProps) => (
     <HomeLayoutTemplate {...props}>
         {hasSidebar ?
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

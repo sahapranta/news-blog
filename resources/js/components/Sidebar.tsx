@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { TrendingUp, Clock, Eye } from 'lucide-react';
+import React from 'react';
+import { TrendingUp, Eye } from 'lucide-react';
 import NewsCard from './NewsCard';
 import { Link } from '@inertiajs/react';
 import { useSiteData } from '@/stores/useSiteData';

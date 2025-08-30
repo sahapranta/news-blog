@@ -12,7 +12,7 @@ const LanguageSwitcher: React.FC = () => {
     { code: 'ur', name: 'اردو', flag: '🇵🇰' }
   ];
 
-  const handleLanguageChange = (language: any) => {
+  const handleLanguageChange = (language: { code?: string, name: string, flag?: string }) => {
     setCurrentLanguage(language.name);
     setIsOpen(false);
     // Here you would implement actual language switching logic

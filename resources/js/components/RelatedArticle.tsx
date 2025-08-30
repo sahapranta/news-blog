@@ -8,18 +8,17 @@ import NewsCard from './NewsCard';
 const RelatedArticle: React.FC<{ id?: string }> = ({ id }) => {
     const [articles, setArticles] = React.useState<ArticleProps[]>([]);
 
-    const fetchArticles = async () => {
-        try {
-            const { data } = await api.get(route('api.news.related', { article: id }));
-            setArticles(data.data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
     useEffect(() => {
+        const fetchArticles = async () => {
+            try {
+                const { data } = await api.get(route('api.news.related', { article: id }));
+                setArticles(data.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
         fetchArticles();
-    }, []);
+    }, [id]);
 
     if (articles.length === 0) return null;
 

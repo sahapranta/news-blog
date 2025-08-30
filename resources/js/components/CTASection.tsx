@@ -5,6 +5,7 @@ import { route } from 'ziggy-js';
 import { Turnstile } from '@marsidev/react-turnstile';
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import { toast } from 'sonner';
+import { ApiError } from '@/types/model';
 
 const CTASection: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -52,8 +53,9 @@ const CTASection: React.FC = () => {
         setError(data.message || 'সাবস্ক্রিপশন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।');
         toast.error(data.message || 'সাবস্ক্রিপশনের সময় একটি সমস্যা হয়েছে।');
       }
-    } catch (error: any) {
-      setError(error?.response?.data?.message || 'সাবস্ক্রিপশনের সময় একটি সমস্যা হয়েছে।');
+    } catch (error: unknown) {
+      const apiError = error as ApiError;
+      setError(apiError?.response?.data?.message || 'সাবস্ক্রিপশনের সময় একটি সমস্যা হয়েছে।');
     } finally {
       setLoading(false);
     }

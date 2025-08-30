@@ -6,13 +6,9 @@ import {
   Heart,
   Download,
   Eye,
-  Calendar,
-  Bell,
-  Shield,
+  Calendar,  
   Edit3,
-  Camera,
-  Mail,
-  Phone,
+  Camera,  
   MapPin,
   Award,
   TrendingUp,
@@ -24,7 +20,7 @@ import HomeLayout from '@/layouts/home-layout';
 const ProfilePage: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [isEditing, setIsEditing] = useState(false);
-  const [userInfo, setUserInfo] = useState({
+  const [userInfo] = useState({
     name: 'মোহাম্মদ রহিম',
     email: 'rahim@example.com',
     phone: '+৮৮০ ১৭১৫ ৭৫৮৯৪৮',

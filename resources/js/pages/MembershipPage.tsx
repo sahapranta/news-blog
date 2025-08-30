@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
 import {
   CreditCard,
-  Check,
   Star,
   Gift,
   Truck,
-  Calendar,
   BookOpen,
   Download,
-  Bell,
-  Shield,
+  Bell,  
   Users,
   Award
 } from 'lucide-react';
 import Sidebar from '@/components/Sidebar';
 import HomeLayout from '@/layouts/home-layout';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 
 const MembershipPage: React.FC = () => {
   const [formData, setFormData] = useState({

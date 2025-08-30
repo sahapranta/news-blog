@@ -11,6 +11,7 @@ import { SharedData } from "@/types";
 import { CommentCard, CommentProps } from "@/components/CommentCard";
 import { CommentCardEditable } from "@/components/CommentCardEditable";
 import { api } from "@/hooks/use-api";
+import { ApiError } from "@/types/model";
 
 type CommentSectionProps = {
   id?: string;
@@ -59,9 +60,10 @@ const CommentSection: React.FC<CommentSectionProps> = ({ id }) => {
       });
       setComments([data.data, ...comments]);
       setComment("");
-    } catch (error: any) {
+    } catch (err: unknown) {
+      const error = err as ApiError;
       if (error) {
-        toast.error(error.response.status === 422 ? "Validation Error" : "Something Went Wrong", {
+        toast.error(error.response?.status === 422 ? "Validation Error" : "Something Went Wrong", {
           description: error.response?.data?.message || error.message,
         });
       }
@@ -88,7 +90,8 @@ const CommentSection: React.FC<CommentSectionProps> = ({ id }) => {
         )
       );
       toast.success("Comment Updated Successfully");
-    } catch (error: any) {
+    } catch (err: unknown) {
+      const error = err as ApiError;
       if (error) {
         toast.error("Something Went Wrong", {
           description: error.message,
@@ -109,7 +112,8 @@ const CommentSection: React.FC<CommentSectionProps> = ({ id }) => {
       setComments(prev => prev.filter(comment => comment.id !== id));
 
       toast.success("Comment Deleted Successfully");
-    } catch (error: any) {
+    } catch (err: unknown) {
+      const error = err as ApiError;
       if (error) {
         toast.error("Something Went Wrong", {
           description: error.message,

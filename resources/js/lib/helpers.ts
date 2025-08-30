@@ -1,5 +1,6 @@
 export const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
 export const url = (path = '') => `${import.meta.env.VITE_APP_URL || ''}${path}`;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function debounce<T extends (...args: any[]) => void>(
     func: T,
     wait: number

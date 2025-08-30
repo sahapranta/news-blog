@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Search, X, TrendingUp, Folder, ChevronLeft, ChevronRight, Loader2Icon, ExternalLinkIcon, FileTextIcon, GraduationCapIcon, BookIcon, FolderIcon, FileIcon, Icon, CalendarFoldIcon, FanIcon } from 'lucide-react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { Search, X, TrendingUp, Folder, ChevronLeft, ChevronRight, Loader2Icon, ExternalLinkIcon, FileTextIcon, GraduationCapIcon, BookIcon, FolderIcon, CalendarFoldIcon, FanIcon, LucideIcon } from 'lucide-react';
 import { Link } from '@inertiajs/react';
 import { useTranslation } from '@/lib/useTranslation';
 import { route } from 'ziggy-js';
@@ -26,7 +26,7 @@ interface IconProps {
 }
 
 const ContentIcon: React.FC<IconProps> = ({ type = 'common', className = "w-5 h-5 text-gray-500 group-hover:text-blue-600 transition-colors" }) => {
-  const contentIcons: Record<string, any> = {
+  const contentIcons: Record<string, LucideIcon> = {
     article: FileTextIcon,
     paper: GraduationCapIcon,
     book: BookIcon,
@@ -55,7 +55,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
     "প্রযুক্তি"
   ];
 
-  const fetchResults = async (query: string, pageNumber = 1) => {
+  const fetchResults = useCallback(async (query: string, pageNumber = 1) => {
     if (query.length < 3) return;
 
     setLoading(true);
@@ -67,23 +67,24 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
       setPagination({ last_page: data.last_page, current_page: data.current_page });
     } catch (error) {
       setResults([]);
+      console.log(error)
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const debouncedSearch = useCallback(
-    debounce((query: string, pageNumber: number) => {
+  const debouncedSearch = useMemo(
+    () => debounce((query: string, pageNumber: number) => {
       fetchResults(query, pageNumber);
     }, 800),
-    []
+    [fetchResults]
   );
 
   useEffect(() => {
     if (searchQuery.length >= 3) {
       debouncedSearch(searchQuery, page);
     }
-  }, [searchQuery, page]);
+  }, [searchQuery, page, debouncedSearch]);
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -205,7 +206,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
                           <div className="flex-1">
                             <h4 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 text-base leading-tight">
                               {result.title}
-                            </h4>                            
+                            </h4>
                             <span className='text-sm text-gray-400 font-medium capitalize'>{result.type}</span>
                           </div>
                         </div>

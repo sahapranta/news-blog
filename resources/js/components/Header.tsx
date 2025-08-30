@@ -2,9 +2,9 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { Menu, Search, User, X } from 'lucide-react';
 import SearchModal from './SearchModal';
-import LanguageSwitcher from './LanguageSwitcher';
+// import LanguageSwitcher from './LanguageSwitcher';
 import { type SharedData } from '@/types';
-import { ChevronsUpDown } from 'lucide-react';
+// import { ChevronsUpDown } from 'lucide-react';
 import { useTranslation } from '@/lib/useTranslation';
 import { isMac } from '@/lib/helpers';
 

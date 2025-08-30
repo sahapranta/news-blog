@@ -9,7 +9,7 @@ interface PageProps {
     title: string;
     slug: string;
     content: string;
-    options: any;
+    options: unknown;
     meta_title?: string;
     meta_image?: string;
     meta_description?: string;

@@ -1,5 +1,5 @@
 import HomeLayout from '@/layouts/home-layout';
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import { Button } from "@/components/ui/button"
 import { Loader2, FileDown, HardDriveDownloadIcon, CirclePlayIcon } from "lucide-react"
@@ -11,7 +11,7 @@ import { Head } from '@inertiajs/react';
 const PaperDownloadPage: React.FC<{ paper: PaperProps }> = ({ paper }) => {
     const [loading, setLoading] = useState(false)
     const [downloadUrl, setDownloadUrl] = useState('')
-    const [directDownload, setDirectDownload] = useState(false)
+    // const [directDownload, setDirectDownload] = useState(false)
 
     const getLink = async () => {
         try {

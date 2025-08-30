@@ -12,7 +12,7 @@ export default function HomeHeaderLayout({ children }: PropsWithChildren) {
 
     useEffect(() => {
         fetchBreakingNews();
-    }, []);
+    }, [fetchBreakingNews]);
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-800">

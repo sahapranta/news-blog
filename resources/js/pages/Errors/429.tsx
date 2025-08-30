@@ -1,9 +1,9 @@
 import HomeLayout from '@/layouts/home-layout';
 import { Link, Head } from '@inertiajs/react';
-import { ArrowLeft, Home, Clock } from 'lucide-react';
+import { ArrowLeft, Home } from 'lucide-react';
 import React from 'react';
 
-const TooManyRequests: React.FC<{ message: any }> = ({ message }) => {
+const TooManyRequests: React.FC<{ message: string }> = ({ message }) => {
     return (
         <HomeLayout>
             <Head>

@@ -55,7 +55,7 @@ const MagazinePage: React.FC<{
     }, 600);
 
     return () => clearTimeout(timeout);
-  }, [searchQuery]);
+  }, [searchQuery, filters.search]);
 
   const months = [
     'জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন',

@@ -1,4 +1,4 @@
-# Samacar Website - Full Admin Panel
+# News Website - Full Admin Panel
 
 A modern, full-featured news and content management website built with Laravel 12, React 19, and Filament 4. This application provides a complete content management system with an admin panel, user authentication, and a responsive frontend.
 
